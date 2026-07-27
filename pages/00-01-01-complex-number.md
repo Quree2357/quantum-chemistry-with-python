@@ -1,5 +1,7 @@
 # 0.1.1 복소수와 오일러 공식
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/00-01-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 선형대수 이야기를 하겠다고 해놓고 갑자기 복소수? *으악, 도망쳐!* 라고 생각하실 수도 있지만... 이유는 간단합니다. 양자역학에서 다루는 파동함수가 일반적으로 복소수 값을 가지는 함수이기 때문입니다. 그러니 일단 간단하게만 돌아보고 넘어갑시다.
 
 
