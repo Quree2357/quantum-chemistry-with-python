@@ -43,7 +43,7 @@ plt.ylabel(r'Energy density')
 plt.title(f'Blackbody radiation at T = {T} K')
 plt.show()
 ```
-![Rayleigh-Jeans law](/assets/image-2.png)  
+![레일리-진즈 법칙](/assets/image-2.png)  
 
 이 모델의 문제가 무엇인지 아시겠나요? 실제 실험 데이터를 같이 표시하지는 않았지만 진동수가 커질수록 에너지가 급격히 커진다는 것은 흑체가 방출하는 빛이 무한대의 진동수에서 무한대의 에너지를 갖는다는 것을 의미합니다. 이 식대로라면 우리 우주는 이미 무한대의 진동수를 가지는 빛으로 가득했을 겁니다. 이를 <b>자외선 파국(ultraviolet catastrophe)</b>라고 부릅니다. 하지만 실제 우리 우주는 그렇지 않습니다. 분명히 레일리와 진즈는 고전 이론에 충실하게 공식을 유도하였고, 중간에 틀린 점도 없었습니다. 그렇다면 대체 무엇이 문제였을까요?
 
@@ -82,7 +82,7 @@ plt.title(f'Blackbody radiation at T = {T} K')
 plt.show()
 ```
 
-![Planck's law](/assets/image-3.png)  
+![플랑크의 법칙](/assets/image-3.png)  
 
 우와, 아까랑 전혀 다른 모양의 그래프가 나왔습니다! 더구나 이제는 진동수가 커진다고 해서 에너지가 무한대로 발산하지도 않습니다. 그리고 더 놀라운 사실은, 이 그래프는 실험으로 얻은 데이터와 정확히 일치했습니다. 플랑크가 흑체 복사 스펙트럼을 설명하는 데 성공한 것입니다! 이상한 가정을 하나 추가하였을 뿐인데 모델이 전혀 달라졌습니다. 이 가정을 <b>양자 가설(quantum hypothesis)</b>라고 부릅니다.  
 
@@ -98,7 +98,7 @@ plt.title(f'Blackbody radiation at different temperatures')
 plt.legend()
 plt.show()
 ```
-![Blackbody radiation at different temperatures](/assets/image-4.png)  
+![다양한 온도에서의 흑체 복사](/assets/image-4.png)  
 
 온도가 높아질 수록 흑체 복사의 에너지가 증가합니다. 또 하나 중요한 점은 에너지가 최대인 지점의 진동수 또한 증가하고 있다는 것입니다. 진동수가 증가한다는 것은 반대로 파장이 감소하고 있다는 뜻인데요, 온도가 증가함에 따라 긴 파장인 빨간색에서 짧은 파장인 파란색으로 가고 있습니다. 처음에 얘기한 별의 온도에 따른 색깔과 같은 결론이네요! 역시 플랑크의 흑체 복사 모델이 맞는 것 같습니다.
 
