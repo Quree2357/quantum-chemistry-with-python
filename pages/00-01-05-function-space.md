@@ -268,7 +268,7 @@ f . f     = 0.03333333333333125
 | 내적 $\sum_i u_i^* v_i$ | $\int f^*g dx$ |
 | 직교 $\langle \mathbf{u}, \mathbf{v} \rangle = 0$ | $\langle f, g \rangle = 0$ |
 | 정규직교기저 $\mathbf{e}_i$ | 정규직교 함수계 $e_n(x)$ |
-| 전개 계수 $c_i = \langle \mathbf{e}_i, \mathbf{v} \rangle | $c_n =  \langle e_n, f \rangle $ |
+| 전개 계수 $c_i = \langle \mathbf{e}_i, \mathbf{v} \rangle$ | $c_n =  \langle e_n, f \rangle $ |
 
 아직 빈칸이 하나 있습니다. 행렬은 어디로 갔을까요? 벡터를 다른 벡터로 바꾸는 변환이 행렬이라면, 함수를 다른 함수로 바꾸는 변환도 있어야 하지 않을까요?
 
