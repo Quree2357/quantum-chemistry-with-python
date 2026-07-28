@@ -36,7 +36,7 @@ $f$가 무엇처럼 보이나요? 숫자 열한 개를 나열한 것, 그러니�
 벡터에서 가장 중요한 연산이 내적이었죠. 성분끼리 곱해서 더하는 것이었습니다.
 
 $$
-\mathbf{u}\cdot\mathbf{v} = \sum_i u_i v_i
+\langle \mathbf{u}, \mathbf{v} \rangle = \sum_i u_i v_i
 $$
 
 함수를 벡터로 봤다면, 함수끼리도 내적을 할 수 있어야 합니다. 격자점마다 값을 곱해서 전부 더하면 되겠죠. 그런데 격자를 촘촘하게 만들수록 항의 개수가 늘어나니, 그냥 더하면 값이 계속 커져버립니다. 그래서 격자 간격 $\Delta x$를 곱해줍니다.
@@ -92,11 +92,11 @@ N =  10000   sum f*g*dx = 0.999864
 그러니까 함수의 내적은 이렇게 정의하면 되겠네요.
 
 $$
-f \cdot g = \int f^{*}(x)g(x)dx
+\langle f, g \rangle = \int f^{*}(x)g(x)dx
 $$
 
 켤레가 붙어 있는 건 함수가 복소수 값을 가질 수 있기 때문입니다. 0.1.2에서 복소수 벡터의 내적을 구할 때에는 한 쪽에 켤레를 씌웠었죠.  
-($f \cdot g$라고 쓴 것은 정식 표기법은 아닙니다. 6장부터는 함수의 내적을 $\langle f | g \rangle$라고 표기할 것입니다.)
+(6장부터는 함수의 내적을 $\langle f | g \rangle$라고 표기할 것입니다.)
 
 [[TIP]]
 위 코드처럼 단순히 `np.dot(f, g) * dx`로 계산하면 수렴이 느립니다. 사다리꼴 공식을 쓰는 `np.trapezoid(f * g, x)`를 쓰면 훨씬 빨리 정확해집니다. NumPy 2.0 이전 버전에서는 `np.trapz`를 쓰면 됩니다.
@@ -165,7 +165,7 @@ e4 . e8 =  0.000000
 자기 자신과의 내적은 1, 다른 함수와의 내적은 0. 어디서 본 형태죠?
 
 $$
-e_m \cdot e_n = \delta_{mn}
+\langle e_m, e_n \rangle = \delta_{mn}
 $$
 
 네, 정규직교기저를 정의할 때 나왔던 바로 그 식입니다. 즉, 이 함수들은 정규직교기저를 이룹니다. 다만 이번엔 개수가 유한하지 않고 무한히 많죠. 이 기저를 완전(complete)하다고 합니다. 무한히 많은 항을 다 쓰면 양 끝에서 0이 되는 어떤 함수든 표현할 수 있다는 뜻입니다. 지금은 결과만 받아들이고, 정말 그런지는 바로 다음에 눈으로 확인해보죠.
@@ -176,13 +176,13 @@ $$
 0.1.2에서 벡터를 정규직교기저로 펼쳤던 것 기억하시나요? 그리고 각 계수들은 내적으로 구할 수 있었죠.
 
 $$
-\mathbf{v} = \sum_i c_i \mathbf{e}_i, \qquad c_i = \mathbf{e}_i \cdot \mathbf{v}
+\mathbf{v} = \sum_i c_i \mathbf{e}_i, \qquad c_i = \langle \mathbf{e}_i, \mathbf{v} \rangle
 $$
 
 함수에서도 완전히 똑같습니다.
 
 $$
-f(x) = \sum_n c_n e_n(x), \qquad c_n = e_n \cdot f
+f(x) = \sum_n c_n e_n(x), \qquad c_n = \langle e_n, f \rangle
 $$
 
 예를 들어, 함수 $f(x) = x(L-x)$를 펼쳐봅시다. 기저는 위에서 선택한 기저 $e_n(x)$로 해보죠. 이 함수는 위로 볼록한 포물선 모양의 함수인데, 아까 들었던 예와 같이 $x=0$과 $x=L$에서 함숫값이 0이 됩니다.(양 끝에서 0이 되지 않는 함수를 이 기저로 펼치면 잘 맞지 않습니다. 기저를 고를 때 문제의 조건을 잘 봐야 하는 이유입니다.)
@@ -265,10 +265,10 @@ f . f     = 0.03333333333333125
 |---|---|
 | 벡터 $\mathbf{v}$ | 함수 $f(x)$ |
 | 성분 $v_i$ | 함숫값 $f(x)$ |
-| 내적 $\sum_i u_i^* v_i$ | $\int f^*gdx$ |
-| 직교 $\mathbf{u} \cdot \mathbf{v}=0$ | $f \cdot g = 0$ |
+| 내적 $\sum_i u_i^* v_i$ | $\int f^*g dx$ |
+| 직교 $\langle \mathbf{u}, \mathbf{v} \rangle = 0$ | $\langle f, g \rangle = 0$ |
 | 정규직교기저 $\mathbf{e}_i$ | 정규직교 함수계 $e_n(x)$ |
-| 전개 계수 $c_i = \mathbf{e}_i\cdot\mathbf{v}$ | $c_n =  e_n \cdot f$ |
+| 전개 계수 $c_i = \langle \mathbf{e}_i, \mathbf{v} \rangle | $c_n =  \langle e_n, f \rangle $ |
 
 아직 빈칸이 하나 있습니다. 행렬은 어디로 갔을까요? 벡터를 다른 벡터로 바꾸는 변환이 행렬이라면, 함수를 다른 함수로 바꾸는 변환도 있어야 하지 않을까요?
 
