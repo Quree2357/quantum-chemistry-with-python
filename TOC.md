@@ -17,4 +17,4 @@
   * [1.1. 흑체 복사와 자외선 파국](pages/01-01-blackbody-radiation.md)
   * [1.2. 광전 효과와 빛의 이중성](pages/01-02-photoelectric-effect.md)
   * [1.3. 선스펙트럼과 보어의 원자 모형](pages/01-03-Bohr-atomic-model.md)
-  * [1.4. 그래서 무엇이 부족했나](pages/01-04-what-was-the-problem.md)
+  * [1.4. 그래서 무엇이 문제였나](pages/01-04-what-was-the-problem.md)
