@@ -1,6 +1,7 @@
 # 0.2.3. 미분 연산자와 행렬
 
-드디어 선형대수와 미적분학이 합쳐지는 0장의 하이라이트입니다. 0.2.의 도입부에서 선형 연산자는 행렬로 쓸 수 있으니 미분 연산자도 행렬로 쓸 수 있다고 했었죠. 그런데 행렬의 성분을 정하려면 먼저 기저를 정해줘야 합니다. 미분의 기저? *생전 처음 보는 단어의 등장*입니다...  
+드디어 선형대수와 미적분학이 합쳐지는 0장의 하이라이트입니다. 내용이 조금 길지만 정말 중요한 내용이니 천천히 따라오세요!  
+0.2.의 도입부에서 선형 연산자는 행렬로 쓸 수 있으니 미분 연산자도 행렬로 쓸 수 있다고 했었죠. 그런데 행렬의 성분을 정하려면 먼저 기저를 정해줘야 합니다. 미분의 기저? *생전 처음 보는 단어의 등장*입니다...  
 
 $$
 f(x) \longrightarrow
@@ -19,7 +20,10 @@ D_{N1} & D_{N2} & \cdots & D_{NN}
 \end{bmatrix}
 \qquad f'(x) = \frac{d}{dx}f(x) \longrightarrow
 \begin{bmatrix}
-f'(x_1) & f'(x_2) & \dots & f'(x_N)
+f'(x_1) \\
+f'(x_2) \\
+\vdots \\
+f'(x_N)
 \end{bmatrix}
 $$
 
@@ -191,8 +195,55 @@ print(f"양 끝 3점씩을 제외하면 = {np.max(err[3:-3]):.3e}")
 
 컴퓨터는 함수를 미분할 때 차분으로 계산하기 때문에 위에서는 차분 행렬을 만들었지만 실제로 적절한 기저를 쓰면 미분 연산자를 오차없이 정확한 행렬로 쓸 수 있습니다. 그리고 그 기저를 우리는 이미 가지고 있습니다. *네?*  
 
-바로 0.1.5.에서 봤던 사인 함수들입니다. 행렬 요소들을 직접 계산해보죠. 0.1.5.에서 함수의 내적을 적분으로 계산했던 것과 같은 방식입니다.
+바로 0.1.5.에서 봤던 사인 함수들입니다. 행렬 요소들을 직접 계산해보죠.  
+*어, 근데 미분을 행렬로 만들면 무한 차원 행렬이 된다면서요!*  
+자자, 속는 셈 치고 한번만 따라와보세요. 일단 미분을 표현한 행렬 $D$가 존재한다고 가정하고 시작해봅시다. 그러면 벡터로 표현된 함수 $f(x)$에 대해서 이 함수의 미분은 $Df(x)$라고 할 수 있겠네요.
+함수 $f(x)$는 정규직교기저 $\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n$에 대해서 다음과 같이 쓸 수 있습니다. (이 기저는 함수로 이루어진 벡터 공간에 대한 정규직교기저입니다.)
 
 $$
-\left\langle e_m \left| \frac{d^2}{dx^2} \right| e_n \right\rangle = \int_0^L e_m(x) \frac{d^2}{dx^2} e_n(x) dx
+f(x) = c_1 \mathbf{e}_1 + c_2 \mathbf{e}_2 + \ldots + c_n \mathbf{e}_n =
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_n
+\end{bmatrix}
+$$
+
+그러면 이 함수의 미분은 다음과 같이 쓸 수 있습니다.
+
+$$
+Df(x) = 
+\begin{bmatrix}
+D_{11} & D_{12} & \cdots & D_{1n} \\
+D_{21} & D_{22} & \cdots & D_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+D_{m1} & D_{m2} & \cdots & D_{mn}
+\end{bmatrix}
+\begin{bmatrix}
+c_1 \\
+c_2 \\
+\vdots \\
+c_n
+\end{bmatrix}
+= \begin{bmatrix}
+D_{11} c_1 + D_{12} c_2 + \ldots + D_{1n} c_n \\
+D_{21} c_1 + D_{22} c_2 + \ldots + D_{2n} c_n \\
+\vdots \\
+D_{m1} c_1 + D_{m2} c_2 + \ldots + D_{mn} c_n
+\end{bmatrix}
+$$
+
+
+$$
+D_{mn} = \left\langle \mathbf{e}_m , \left(D \mathbf{e}_n \right) \right\rangle
+$$
+
+먼저, $n$번째 기저 벡터에 행렬을 곱해서 새 벡터를 만든 후, 이 벡터를 $m$번째 기저 벡터와 내적하는 것입니다. 정말 그런지 확인해볼까요?
+```python
+
+```
+
+$$
+M_{mn} = \left\langle e_m, \space \frac{d^2}{dx^2} e_n \right\rangle = \int_0^L e_m(x) \frac{d^2}{dx^2} e_n(x) dx
 $$
