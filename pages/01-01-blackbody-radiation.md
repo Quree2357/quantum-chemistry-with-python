@@ -1,4 +1,4 @@
-# 1-1. 흑체 복사와 자외선 파국
+# 1.1. 흑체 복사와 자외선 파국
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/01-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 

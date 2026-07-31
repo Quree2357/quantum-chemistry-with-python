@@ -1,4 +1,4 @@
-# 0.2.4. 미분방정식 맛보기
+# 0.2.4. 미분방정식
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/00-02-04.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
