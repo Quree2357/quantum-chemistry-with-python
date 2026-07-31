@@ -1,5 +1,7 @@
 # 1-1. 흑체 복사와 자외선 파국
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/01-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 ## 흑체 복사
 
 **흑체(blackbody)**란 들어오는 빛(전자기파)을 모두 흡수하는 가상의 물체로, 모든 빛을 흡수하여 검게 보이기 때문에 흑체(黑體)라는 이름이 붙었습니다. 이 흑체는 특이한 성질을 가지는데요, 바로 온도에 따라 특정한 파장의 빛을 방출한다는 것입니다. 주변에서 쉽게 볼 수 있는 예시로는 달군 쇠가 있겠네요. 쇠를 달구면 온도가 점점 올라가면서 빨간색, 노란색, 흰색과 같이 색을 내죠.
@@ -40,6 +42,8 @@ def rayleigh_jeans(nu, T):
 plt.plot(nu, rayleigh_jeans(nu, T))
 plt.xlabel(r"Frequency  $\nu$  [Hz]")
 plt.ylabel(r"Energy density")
+plt.xlim(0, 1e15)
+plt.ylim(0, 8e-14)
 plt.title(f"Blackbody radiation at T = {T} K")
 plt.show()
 ```
@@ -75,6 +79,8 @@ def planck(nu, T):
 plt.plot(nu, planck(nu, T))
 plt.xlabel(r"Frequency  $\nu$  [Hz]")
 plt.ylabel(r"Energy density")
+plt.xlim(0, 1e15)
+plt.ylim(0, 2e-15)
 plt.title(f"Blackbody radiation at T = {T} K")
 plt.show()
 ```
@@ -104,6 +110,8 @@ for temperature in T:
     plt.plot(nu, planck(nu, temperature), label=f"T = {temperature} K")
 plt.xlabel(r"Frequency  $\nu$  [Hz]")
 plt.ylabel(r"Energy density")
+plt.xlim(0, 1e15)
+plt.ylim(0, 2e-15)
 plt.title("Blackbody radiation at different temperatures")
 plt.legend()
 plt.show()
