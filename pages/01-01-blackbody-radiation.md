@@ -93,7 +93,7 @@ plt.title(f"Blackbody radiation at T = {T} K")
 plt.legend()
 plt.show()
 ```
-![레일리-진즈 식과 플랑크 식의 비교](/assets/image-19.png)
+![레일리-진즈 식과 플랑크 식의 비교](/assets/image-19.png)  
 한 가지 주목할 점은 두 식 모두 매우 낮은 주파수에서는 정확히 일치하고 있다는 점입니다. 그래서 당시 물리학자들이 더욱 진지하게 받아들였고요.
 
 온도가 달라지면 어떻게 될까요?
