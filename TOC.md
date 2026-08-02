@@ -17,3 +17,8 @@
   * [1.2. 광전 효과와 빛의 이중성](pages/01-02-photoelectric-effect.md)
   * [1.3. 선 스펙트럼과 보어의 원자 모형](pages/01-03-Bohr-atomic-model.md)
   * [1.4. 그래서 무엇이 문제였나](pages/01-04-what-was-the-problem.md)
+* [2. 물질파와 불확정성 원리](pages/02-matter-waves-and-uncertainty-principle.md)
+  * [2.1. 물질도 파동이다](pages/02-01-matter-waves.md)
+  * [2.2. 보어의 가정 해결](pages/02-02-bohr-model-solution.md)
+  * [2.3. 전자의 이중 슬릿 실험](pages/02-03-double-slit-experiment.md)
+  * [2.4. 하이젠베르크의 불확정성 원리](pages/02-04-the-uncertainty-principle.md)
