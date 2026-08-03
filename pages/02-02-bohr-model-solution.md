@@ -21,9 +21,83 @@ $$
 
 그림으로 보면 더욱 분명해집니다.
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
 
+R, A = 1, 0.15
+theta = np.linspace(0, 2 * np.pi, 1000)
+theta_over = np.linspace(2 * np.pi, 3 * np.pi, 250)
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 7))
+
+for row, (n, ok) in enumerate([(4, True), (3.5, False)]):
+    color = "blue" if ok else "red"
+    psi = R + A * np.sin(n * theta)
+    psi_over = R + A * np.sin(n * theta_over)
+
+    ax = axes[row]
+    ax.plot(R * np.cos(theta), R * np.sin(theta), color="lightgray", lw=1.2, ls="--")
+    ax.plot(psi * np.cos(theta), psi * np.sin(theta), color=color, lw=2.2)
+    ax.plot(psi_over * np.cos(theta_over), psi_over * np.sin(theta_over), color=color, lw=2.2, ls="--")
+    ax.plot([R], [0], "o", color="black", ms=7)
+    ax.set_aspect("equal")
+    ax.axis("off")
+    ax.set_xlim(-1.4, 1.4)
+    ax.set_ylim(-1.4, 1.4)
+    ax.set_title(f"n = {n}")
+
+plt.show()
 ```
 
-위쪽은 $n=4$인 경우입니다. 파동이 궤도를 따라 네 번 출렁이며 돌고, 한 바퀴 뒤에 시작점과 정확히 만납니다. 오른쪽 그림에서도 검은 점 두 개가 같은 높이에 있죠. 한편, 아래쪽은 $n=3.5$인 경우입니다. 파동이 한 바퀴를 돌고 나서 시작점과 어긋납니다. 오른쪽 그림에서도 두 점의 높이가 다르죠. 이런 경우에는 파동이 계속 돌면서 자기 자신과 상쇄되어 사라집니다.  
+왼쪽은 $n=4$인 경우입니다. 파동이 궤도를 따라 네 번 출렁이며 돌고, 한 바퀴 뒤에 시작점과 정확히 만납니다. 그리고 계속 같은 모양을 유지하면서 돌죠. 반면에, 오른쪽은 $n=3.5$인 경우입니다. 파동이 한 바퀴를 돌고 나면 그 다음부터는 점선처럼 움직이고, 직전 바퀴의 자기 자신과 위상이 반대가 되어 상쇄시키게 됩니다. 이런 파동은 유지될 수 없습니다.
 
 전자가 파동이라면 아무 궤도나 허용될 수 없다는 뜻입니다.
+
+
+## Bohr의 가정이 풀리다
+
+앞 절에서 배운 de Broglie 공식을 다시 한 번 살펴봅시다. $\lambda = \frac{h}{mv}$였죠. 여기에 위에서 봤던 전자가 파동이라면 만족해야 하는 조건, $2\pi r = n\lambda$을 넣어봅시다.
+
+$$
+2\pi r = \grac{nh}{mv}
+mvr = \frac{nh}{2\pi} = n\hbar
+$$
+
+전자의 각운동량 $L=mvr$이 $\hbar$의 정수배여야 한다는 Bohr의 가정이 튀어나왔습니다! 이제 Bohr의 가정이 왜 그래야 했는지를 이해할 수 있겠군요.  
+
+정말 맞는지 확인해봅시다. 수소 원자의 바닥상태에서의 전자 궤도 둘레와 de Broglie 파장을 각각 계산해서 비교해보죠.
+```python
+from scipy.constants import h, hbar, m_e, e, epsilon_0
+
+a0 = 4 * np.pi * epsilon_0 * hbar**2 / (m_e * e**2)
+v1 = e**2 / (4 * np.pi * epsilon_0 * hbar)
+
+circumference = 2 * np.pi * a0
+wavelength = h / (m_e * v1)
+
+print(f"궤도 둘레        = {circumference:.4e} m")
+print(f"de Broglie 파장 = {wavelength:.4e} m")
+print(f"둘레 / 파장      = {circumference / wavelength:.6f}")
+```
+```
+궤도 둘레        = 3.3249e-10 m
+de Broglie 파장 = 3.3249e-10 m
+둘레 / 파장      = 1.000000
+```
+정확히 1이 나왔네요! 그러니까 수소 원자의 바닥상태는 궤도 둘레에 파장이 딱 하나 들어가는 상태인 것입니다. 위쪽 준위에서는 어떨까요?
+```python
+for n in range(1, 6):
+    r_n = n**2 * a0
+    v_n = v1 / n
+    ratio = 2 * np.pi * r_n / (h / (m_e * v_n))
+
+    print(f"n = {n}    반지름 = {r_n*1e12:6.1f} pm    둘레 / 파장 = {ratio:.4f}")
+```
+```
+n = 1    반지름 =   52.9 pm    둘레 / 파장 = 1.0000
+n = 2    반지름 =  211.7 pm    둘레 / 파장 = 2.0000
+n = 3    반지름 =  476.3 pm    둘레 / 파장 = 3.0000
+n = 4    반지름 =  846.7 pm    둘레 / 파장 = 4.0000
+n = 5    반지름 = 1322.9 pm    둘레 / 파장 = 5.0000
+```
+양자수 $n$이 곧 궤도에 들어가는 파장의 개수였습니다.
