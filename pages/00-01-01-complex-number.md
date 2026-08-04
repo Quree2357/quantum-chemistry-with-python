@@ -1,4 +1,4 @@
-# 0.1.1. 복소수와 오일러 공식
+# 0.1.1. 복소수와 Euler 공식
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/00-01-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
@@ -47,7 +47,7 @@ $$
 
 ![복소수의 극형식](/assets/image-5.png)  
 
-그런데 저 괄호 안의 식에는 아주 유명한 이름이 붙어있습니다. 바로, **오일러의 공식**입니다. 세상에서 가장 아름다운 공식이라는 별명도 붙어있죠.
+그런데 저 괄호 안의 식에는 아주 유명한 이름이 붙어있습니다. 바로, **Euler의 공식**입니다. 세상에서 가장 아름다운 공식이라는 별명도 붙어있죠.
 
 $$
 e^{i\theta}=\cos\theta+i\sin\theta
@@ -100,7 +100,7 @@ $$
 $$
 
 *엥, 갑자기 복소수요? 전혀 다르게 생겼는데요!*  
-위에서 얘기한 오일러 공식을 다시 한번 봅시다.
+위에서 얘기한 Euler의 공식을 다시 한번 봅시다.
 
 $$
 e^{i\theta}=\cos\theta+i\sin\theta
