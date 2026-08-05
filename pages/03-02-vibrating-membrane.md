@@ -65,7 +65,7 @@ $$
 각 모드의 모양은 이렇게 나옵니다. 일단 지금은 시간에 대한 함수는 잊어버리고 공간적인 모양만 보도록 합시다.  
 
 $$
-u_{nm}(x, y) = C_{nm} \sin \left( \frac{n \pi}{a} x \right) \sin \left( \frac{m \pi}{b} x \right) \qquad C_{nm} = A_n B_m
+u_{nm}(x, y) = C_{nm} \sin \left( \frac{n \pi}{a} x \right) \sin \left( \frac{m \pi}{b} y \right) \qquad C_{nm} = A_n B_m
 $$
 
 음... 식으로만 봐서는 1차원 때처럼 직관적으로 모양이 느껴지지는 않습니다. 직접 그려봐야겠군요. 이번엔 2차원의 진동을 봐야 하니 3차원 그림으로 그려야 합니다.
