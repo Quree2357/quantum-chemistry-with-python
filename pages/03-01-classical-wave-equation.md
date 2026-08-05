@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 x = np.linspace(0, 4, 500)
 k, w = np.pi, 2 * np.pi
 
-fig, axes = plt.subplots(5, 1, figsize=(5, 14))
+fig, axes = plt.subplots(5, 1, figsize=(5, 12))
 
 for t, ax in zip([0, 0.13, 0.25, 0.38, 0.5], axes):
     right = np.sin(k * x - w * t)  # 오른쪽으로 진행하는 파동
