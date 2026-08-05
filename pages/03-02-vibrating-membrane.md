@@ -209,6 +209,7 @@ plt.show()
 정말 정사각형에서만 일어나는 일인지 확인해봅시다. 아까처럼 직사각형의 경우에는 어떨까요?
 ```python
 def frequency(n, m, a, b):
+    # v = 1이라고 가정
     return 0.5 * np.sqrt((n / a) ** 2 + (m / b) ** 2)
 
 print("정사각형 (a, b = 1.0)")
