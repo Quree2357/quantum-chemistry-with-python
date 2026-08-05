@@ -58,7 +58,7 @@ $$
 X_n(x) = A_n \sin \left( \frac{n \pi}{a} x \right) \qquad n=1,2,3,\ldots
 $$
 $$
-Y_m(y) = B_m \sin \left( \frac{m \pi}{b} x \right) \qquad m=1,2,3,\ldots
+Y_m(y) = B_m \sin \left( \frac{m \pi}{b} y \right) \qquad m=1,2,3,\ldots
 $$
 
 1차원의 경우와 정확히 같은 형태지만 각 방향의 양자수가 서로 다를 수도 있으니 이번에는 아래첨자로 구분했습니다.  
