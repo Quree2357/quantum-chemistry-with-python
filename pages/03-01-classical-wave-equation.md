@@ -133,6 +133,7 @@ $$
 파장으로 바꿔 쓰면 더 직관적으로 알 수 있습니다. $k=\frac{2\pi}{\lambda}$이므로 $\lambda_n = \frac{2L}{n}$이 됩니다. 즉, 줄 전체 길이의 2배, 1배, 2/3배, 등등과 같은 파장만 허용되는 것입니다. 양 쪽 끝 사이에 봉우리가 1개, 2개, 3개, 등등으로 들어가 있는 이미지가 되겠네요. $n$에 따른 각 파동의 함수를 **모드(mode)**라고 부릅니다. 각 모드가 어떻게 생겼는지 그려봅시다.
 ```python
 L = 1.0
+v = 1.0
 x = np.linspace(0, L, 500)
 
 fig, axes = plt.subplots(4, 1, figsize=(7, 6))
@@ -141,8 +142,8 @@ for n, ax in zip(range(1, 5), axes):
     X = np.sin(n * np.pi * x / L)
 	
     for t, alpha in [(0, 1.0), (0.05, 0.67), (0.1, 0.5), (0.15, 0.33), (0.2, 0.25)]:
-        T = np.cos(n * np.pi * t / L)
-        ax.plot(x, X * T, color="blue", lw=2 if amp == 1 else 1, alpha=alpha)
+        T = np.cos(n * np.pi * v * t / L)
+        ax.plot(x, X * T, color="blue", lw=2 if t == 0 else 1, alpha=alpha)
     nodes = np.arange(0, n + 1) * L / n
     ax.plot(nodes, np.zeros_like(nodes), "o", color="red", ms=6, zorder=5)
     ax.axhline(0, color="black", lw=0.6)
