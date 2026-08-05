@@ -1,5 +1,7 @@
 # 3.1. 진동하는 줄 — 변수분리법
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/03-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 물리학에서 파동을 다루는 방정식은 이미 있다고 얘기했습니다. 이 절에서는 그 방정식에 대해 살펴봅시다. 일단 제일 간단한 1차원의 경우부터 보도록 하죠.
 
 
