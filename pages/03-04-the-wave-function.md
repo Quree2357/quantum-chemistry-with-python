@@ -1,5 +1,7 @@
 # 3.4. 파동함수가 갖춰야 할 조건
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/03-04.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 이제 우리가 가진 궁극의 기술인 Schrödinger 방정식을 풀면 전자의 운동을 완벽하게 기술할 수 있습니다. 그런데 한 가지 문제가 있습니다. 이 궁극기는 발동 조건이 있어서 아무때나 막 쓸 수 있는 기술이 아닙니다.  
 이 방정식을 만족한다고 무조건 파동함수라고 이야기할 수 있는 게 아니라는 뜻입니다. 이 절에서는 그 발동 조건, 파동함수가 갖춰야 할 자격 조건에 대해 살펴보겠습니다.
 
