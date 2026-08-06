@@ -27,4 +27,3 @@
   * [3.2. 진동하는 막 — 2차원 문제](pages/03-02-vibrating-membrane.md)
   * [3.3. Schrödinger 방정식](pages/03-03-the-schrodinger-equation.md)
   * [3.4. 파동함수가 갖춰야 할 조건](pages/03-04-the-wave-function.md)
-  * [3.5. 고유값 문제](pages/03-05-an-eigenvalue-problem.md)
