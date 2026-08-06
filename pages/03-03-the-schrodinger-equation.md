@@ -21,16 +21,16 @@ $$
 이제 가장 단순한 파동 하나를 생각해봅시다. 앞에서 봤던 사인/코사인 함수죠. 지수함수꼴로 쓰면 이렇게 됩니다.
 
 $$
-\psi(x, t) = e^{i(kx - \omega t)}
+\Psi(x, t) = e^{i(kx - \omega t)}
 $$
 
 0.1.1에서 봤던 그 형태죠. 이걸 앞에서 봤던 고전 파동방정식에 넣으면 어떻게 될까요?
 
 $$
-\frac{\partial^2 \psi}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2 \psi}{\partial t^2}
+\frac{\partial^2 \Psi}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2 \Psi}{\partial t^2}
 $$
 
-각각 미분해보면 왼쪽은 $-k^2\psi$, 오른쪽은 $-\omega^2\psi/v^2$이 됩니다. 양변을 $\psi$로 나누면
+각각 미분해보면 왼쪽은 $-k^2\Psi$, 오른쪽은 $-\omega^2\Psi/v^2$이 됩니다. 양변을 $\Psi$로 나누면
 
 $$
 k^2 = \frac{\omega^2}{v^2} \quad \Longrightarrow \quad \omega = vk
@@ -63,16 +63,16 @@ $$
 
 그러면 $\omega \propto k^2$이 나오는 방정식을 한번 만들어봅시다.
 
-미분이 무슨 일을 하는지 보세요. $\psi = e^{i(kx-\omega t)}$에 대해 $x$로 한 번 미분하면 $ik$가 딸려 나오고, $t$로 한 번 미분하면 $-i\omega$가 딸려 나옵니다. 그러니 $\omega$의 1차와 $k$의 2차를 얻으려면 시간에 대해서는 한 번, 공간에 대해서는 두 번 미분해야 합니다.
+미분이 무슨 일을 하는지 보세요. $\Psi = e^{i(kx-\omega t)}$에 대해 $x$로 한 번 미분하면 $ik$가 딸려 나오고, $t$로 한 번 미분하면 $-i\omega$가 딸려 나옵니다. 그러니 $\omega$의 1차와 $k$의 2차를 얻으려면 시간에 대해서는 한 번, 공간에 대해서는 두 번 미분해야 합니다.
 
 $$
-\frac{\partial \psi}{\partial t} = C\frac{\partial^2 \psi}{\partial x^2}
+\frac{\partial \Psi}{\partial t} = C\frac{\partial^2 \Psi}{\partial x^2}
 $$
 
-$C$가 어떤 상수인지 알아봅시다. $\psi$를 대입해보면 다음과 같죠.
+$C$가 어떤 상수인지 알아봅시다. $\Psi$를 대입해보면 다음과 같죠.
 
 $$
--i\omega \psi = C(-k^2 \psi) \quad \Longrightarrow \quad \omega = -iCk^2
+-i\omega \Psi = C(-k^2 \Psi) \quad \Longrightarrow \quad \omega = -iCk^2
 $$
 
 여기서 중요한 일이 벌어집니다. $\omega$는 진동수이니 실수여야 합니다. 그런데 우변에 $-i$가 붙어 있죠. 그러니 $C$ 자체가 순허수여야 $\omega$가 실수로 나옵니다.
@@ -82,7 +82,7 @@ $$
 $C = i\hbar/2m$으로 두면 $\omega = \hbar k^2/2m$이 정확히 나옵니다. 정리하면 이렇게 되겠네요.
 
 $$
-i\hbar\frac{\partial \psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \psi}{\partial x^2}
+i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi}{\partial x^2}
 $$
 
 확인해봅시다. SymPy로 자유 전자 파동을 넣어보죠.
@@ -111,7 +111,7 @@ print("우변 / psi =", sp.simplify(right / psi))
 만약 전자가 퍼텐셜 장 안에서 움직인다면 퍼텐셜 에너지까지 더해주면 됩니다.
 
 $$
-i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2} + V(x)\psi
+i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi}{\partial x^2} + V(x)\psi
 $$
 
 이것이 바로 **시간 의존 Schrödinger 방정식(time-dependent Schrödinger equation)**입니다. 1926년에 발표되었죠.
@@ -124,9 +124,9 @@ $$
 고전 파동방정식과 나란히 놓아봅시다.
 
 $$
-\frac{\partial^2u}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2u}{\partial t^2}
+\frac{\partial^2 u}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2 u}{\partial t^2}
 \qquad\qquad
-i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\psi}{\partial x^2} + V\psi
+i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi}{\partial x^2} + V \Psi
 $$
 
 - 첫째, 시간 미분이 1차입니다.  
@@ -223,16 +223,14 @@ for t in [0, 10, 20, 30]:
 
 여기서 분명히 해둘 것이 있습니다. 방금 우리가 한 것은 Schrödinger 방정식을 유도한 게 아닙니다.
 
-"분산 관계가 이래야 하니 미분 횟수가 이렇고, 그러니 $i$가 필요하다"는 이야기는 그럴듯하지만, 어디까지나 왜 이런 모양인지 납득해보는 과정입니다. 실제로 우리는 $E=p^2/2m$이라는 답을 이미 알고 거꾸로 맞춰 들어갔죠. McQuarrie와 같은 다른 양자역학 책들은 다른 출발점에서 시작해서 Schrödinger 방정식을 이끌어내기도 하지만 마찬가지로 유도한 것은 아닙니다.
+"분산 관계가 이래야 하니 미분 횟수가 이렇고, 그러니 $i$가 필요하다"는 이야기는 그럴듯하지만, 어디까지나 왜 이런 모양인지 납득해보는 과정입니다. 실제로 우리는 $E=p^2/2m$이라는 답을 이미 알고 거꾸로 맞춰 들어갔죠. McQuarrie와 같은 다른 양자역학 책들은 다른 출발점에서 시작해서 Schrödinger 방정식을 이끌어내기도 하지만 마찬가지로 유도한 것은 아닙니다. Schrödinger 방정식은 더 근본적인 무언가에서 유도된 것이 아닙니다. Newton의 $F=ma$가 유도된 식이 아닌 것과 같습니다. 근거는 실험 결과와 잘 맞는다는 것 하나뿐이죠. 그래서 과학자들은 Schrödinger 방정식을 양자역학의 공리 중 하나로서 받아들였습니다.
 
-Schrödinger 방정식은 더 근본적인 무언가에서 유도된 것이 아닙니다. Newton의 $F=ma$가 유도된 식이 아닌 것과 같습니다. 근거는 실험 결과와 잘 맞는다는 것 하나뿐이죠. 그래서 과학자들은 Schrödinger 방정식을 양자역학의 공리 중 하나로써 받아들였습니다.
-
-그리고 100년 가까이 지난 지금까지, 이 방정식이 틀렸다는 실험 결과는 하나도 나오지 않았습니다.
+그리고 100년 가까이 지난 지금까지, 이 방정식이 틀렸다는 실험 결과는 하나도 나오지 않았습니다. 마치 Newton의 운동법칙이 틀렸다는 실험 결과가 하나도 없는 것처럼요.
 
 
 ## 시간을 독립시키기
 
-Schrödinger 방정식은 시간 변수를 포함하고 있는데, 사실 우리가 앞으로 다룰 문제 대부분은 시간에 따라 변하지 않는 상황입니다. 그러면 시간 부분을 따로 떼어내기 위해 3.1절에서 썼던 변수분리법을 그대로 적용해봅시다. 만약 퍼텐셜 $V$가 시간에 무관하다면 $\psi(x,t) = \psi(x)T(t)$로 둘 수 있고, 정리하면 시간 부분이 이렇게 떨어져 나옵니다.
+Schrödinger 방정식은 시간 변수를 포함하고 있는데, 사실 우리가 앞으로 다룰 문제 대부분은 시간에 따라 변하지 않는 상황입니다. 그러면 시간 부분을 따로 떼어내기 위해 3.1절에서 썼던 변수분리법을 그대로 적용해봅시다. 상수는 $E$라고 놓읍시다. 왜냐면 나중에 이 값이 에너지 자리에 놓일 거거든요. 만약 퍼텐셜 $V$가 시간에 무관하다면 $\Psi(x,t) = \psi(x)T(t)$로 둘 수 있고, 정리하면 시간 부분이 이렇게 떨어져 나옵니다.
 
 $$
 T(t) = e^{-iEt/\hbar}
@@ -244,21 +242,19 @@ $$
 -\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2} + V(x)\psi = E\psi
 $$
 
-이것을 **시간 독립 Schrödinger 방정식(time-independent Schrödinger equation)**이라고 부릅니다. 앞으로 이 책에서 "Schrödinger 방정식"이라고 하면 대부분 이것을 뜻합니다.
+이것을 **시간 독립 Schrödinger 방정식(time-independent Schrödinger equation)**이라고 부릅니다. 앞으로 이 책에서 "Schrödinger 방정식"이라고 하면 대부분 이것을 뜻합니다. 그리고 앞으로 대문자 $\Psi$가 아닌 소문자 $\psi$라고 하면 시간 독립인 경우의 해를 의미합니다.
 
 여기서 재미있는 점이 있습니다. 시간 부분 $e^{-iEt/\hbar}$는 크기가 1인 복소수라서, 확률밀도를 구하면 통째로 사라집니다.
 
 $$
-|\psi(x,t)|^2 = |\psi(x)|^2 \cdot |e^{-iEt/\hbar}|^2 = |\psi(x)|^2
+|\Psi(x,t)|^2 = |\psi(x)|^2 \cdot |e^{-iEt/\hbar}|^2 = |\psi(x)|^2
 $$
 
 확률밀도가 시간에 따라 변하지 않습니다. 파동함수 자체는 계속 위상이 돌고 있는데, 우리가 관측하는 양은 멈춰 있는 것이죠. 이런 상태를 **정상상태(stationary state)**라고 부릅니다.
 
-1.3절이 떠오르시나요? Bohr가 근거 없이 가정했던 것 중 하나가 "특정 궤도에 있는 동안에는 빛을 내지 않는다"였습니다. 그 궤도를 정상상태라고 불렀고요. 그 정상상태의 수학적 정체가 바로 이것입니다. 확률 분포가 시간에 따라 변하지 않으니 전자가 가속되는 것도 아니고, 그래서 빛을 낼 이유도 없죠.
+1.3절이 떠오르시나요? Bohr가 근거 없이 가정했던 것 중 하나가 "특정 궤도에 있는 동안에는 빛을 내지 않는다"였습니다. 그 궤도를 정상상태라고 불렀고요. 그 정상상태의 수학적 정체가 바로 이것입니다. 확률 분포가 시간에 따라 변하지 않으니 전자가 가속되는 것도 아니고, 그래서 빛을 낼 이유도 없죠. 2.2절에서는 각운동량에 대한 가정을 갚았고, 여기서는 두 번째 가정을 갚은 셈입니다.
 
-2.2절에서 각운동량 가정을 갚았고, 여기서 두 번째 가정을 갚은 셈입니다.
-
-이제 Schrödinger 방정식을 손에 넣었습니다. 그런데 이 방정식을 만족한다고 아무 함수나 전자의 파동함수가 될 수 있는 건 아닙니다. 다음 절에서는 파동함수가 갖춰야 할 조건들을 정리하겠습니다.
+이제 우리는 Schrödinger 방정식을 손에 넣었습니다. 그런데 이 방정식을 만족한다고 아무 함수나 전자의 파동함수가 될 수 있는 건 아닙니다. 다음 절에서는 파동함수가 갖춰야 할 조건들을 정리하겠습니다.
 
 
 ## 확인 문제
