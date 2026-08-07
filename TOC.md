@@ -30,6 +30,6 @@
 * [4. 상자 속 입자](pages/04-particle-in-a-box.md)
   * [4.1. 같은 방정식, 다른 의미](pages/04-01-1D-PIB.md)
   * [4.2. 색을 내는 분자](pages/04-02-conjugate-molecules.md)
-  * [4.3. 컴퓨터로 풀어보기](pages/04-03-computing-1D-PIB.md)
-  * [4.4. 3차원 상자 속 입자](pages/04-04-3D-PIB.md)
+  * [4.3. 3차원 상자 속 입자](pages/04-03-3D-PIB.md)
+  * [4.4. 컴퓨터로 풀어보기](pages/04-04-computing-1D-PIB.md)
   * [4.5. 벽을 뚫고 나가다](pages/04-05-tunneling.md)
