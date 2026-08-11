@@ -470,7 +470,7 @@ print("이론값 n*pi/L (n=1...4) :", [round(n * np.pi / L, 5) for n in range(1,
 | 내적 $\sum_i u_i^*v_i$ | $\int f^*g\,dx$ |
 | 직교(내적이 0) | 직교(내적 적분이 0) |
 | 정규직교기저 $\mathbf{e}_i$ | 정규직교 함수계 $e_n(x)$ |
-| 전개 계수 $c_i = \langle \mathbf{e}_i,\mathbf{v} \rangle$ | $c_n = \langle e_n , f \rangle$ |
+| 전개 계수 $c_i = \langle \mathbf{e}_i, \mathbf{v} \rangle$ | $c_n = \langle e_n, f \rangle$ |
 | 행렬 $A$ | 연산자 $\hat{A}$ |
 | 대칭·에르미트 행렬 | 에르미트 연산자 |
 | 고유벡터·고유값 | 고유함수·고유값 |
