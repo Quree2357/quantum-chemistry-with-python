@@ -7,12 +7,12 @@
 
 ## 유한 우물과 양자 터널링
 
-지금까지 우리 상자의 벽은 무한히 높았습니다. 전자가 아무리 큰 에너지를 가져도 넘을 수 없었죠. 4.4절에서는 무한 우물에서 퍼텐셜의 모양을 바꿔봤지만 여기서는 우물의 벽 자체를 유한하게 만들어보겠습니다.
+지금까지 우리 상자의 벽은 무한히 높았습니다. 전자가 아무리 큰 에너지를 가져도 넘을 수 없었죠. 4.4절에서는 무한 우물에서 우물 바닥의 퍼텐셜 모양을 바꾸면서 계산했지만 이번에는 우물의 벽을 유한한 높이로 만들어보겠습니다. 벽이 4 eV 정도의 높이라면 어떻게 될까요?
 
 $$
 V(x) = \begin{cases}
-0 & (\text{우물 안}) \\
-V_0 & (\text{우물 밖})
+0 \text{ eV} & (\text{우물 안}) \\
+4 \text{ eV} & (\text{우물 밖})
 \end{cases}
 $$
 
@@ -23,39 +23,47 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.constants import hbar, m_e, e, h
 
+
 def second_derivative_matrix(N, dx):
-    return (-2*np.eye(N) + np.eye(N, k=1) + np.eye(N, k=-1)) / dx**2
+    return (-2 * np.eye(N) + np.eye(N, k=1) + np.eye(N, k=-1)) / dx**2
+
 
 def solve(N, L, potential):
-    dx = L/(N+1)
-    x = np.linspace(0, L, N+2)[1:-1]
-    H = -hbar**2/(2*m_e)*second_derivative_matrix(N, dx) + np.diag(potential(x))
+    dx = L / (N + 1)
+    x = np.linspace(0, L, N + 2)[1:-1]
+    H = -(hbar**2) / (2 * m_e) * second_derivative_matrix(N, dx) + np.diag(potential(x))
     E, psi = np.linalg.eigh(H)
-    return x, E/e, psi
+    return x, E / e, psi
 
-L, N, w = 4e-9, 1200, 1e-9          # 전체 구간 4 nm, 우물 폭 1 nm
+
+L, N, w = 4e-9, 1200, 1e-9  # 전체 구간 4 nm, 우물 폭 1 nm
+
 
 def well(V0_eV):
     """가운데 폭 w인 우물, 바깥은 V0"""
-    return lambda x: np.where(np.abs(x - L/2) < w/2, 0.0, V0_eV*e)
+    return lambda x: np.where(np.abs(x - L / 2) < w / 2, 0.0, V0_eV * e)
+
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), sharey=True)
 
-for ax, (V0, title) in zip(axes, [(1e6, "infinite well"), (5.0, "finite well (5 eV)")]):
+for ax, (V0, title) in zip(axes, [(1e6, "infinite well"), (4.0, "finite well (4 eV)")]):
     x, E, psi = solve(N, L, well(V0))
-    ax.plot(x*1e9, np.clip(well(V0)(x)/e, 0, 6), color="black", lw=1.8)
+    ax.plot(x * 1e9, np.clip(well(V0)(x) / e, 0, 6), color="black", lw=1.8)
     for k in range(3):
         v = psi[:, k]
         if v[np.argmax(np.abs(v))] < 0:
             v = -v
-        ax.hlines(E[k], 0, L*1e9, color="gray", lw=0.7, ls=":")
-        ax.plot(x*1e9, E[k] + 0.6*v/np.abs(v).max(), lw=1.8)
-    ax.set_xlim(1.0, 3.0); ax.set_ylim(-0.5, 4.5)
-    ax.set_xlabel("x (nm)"); ax.set_title(title, fontsize=12)
+        ax.hlines(E[k], 0, L * 1e9, color="gray", lw=0.7, ls=":")
+        ax.plot(x * 1e9, E[k] + 0.6 * v / np.abs(v).max(), lw=1.8)
+    ax.set_xlim(1.0, 3.0)
+    ax.set_ylim(0, 5)
+    ax.set_xlabel("x (nm)")
+    ax.set_title(title, fontsize=12)
 
 axes[0].set_ylabel("E (eV)")
 plt.show()
 ```
+![유한 우물의 경우](/assets/image-50.png)
 
 무한 우물이었을 때와 비교해서 두 가지가 달라집니다.
 
@@ -63,21 +71,21 @@ plt.show()
   무한 우물에서는 벽에서 정확히 0이었는데, 유한 우물에서는 벽 안쪽으로 스며들어가면서 지수적으로 줄어듭니다. 이런 현상을 **양자 터널링(quantum tunnelling)**이라고 부릅니다. 전자가 벽 안에 있을 확률을 실제로 계산해봅시다.
 
 ```python
-x, E, psi = solve(N, L, well(5.0))
-outside = np.abs(x - L/2) > w/2
+x, E, psi = solve(N, L, well(4.0))
+outside = np.abs(x - L / 2) > w / 2
 
 for k in range(3):
     v = psi[:, k]
-    p = np.sum(v[outside]**2) / np.sum(v**2)
-    print(f"n={k+1}: E={E[k]:.3f} eV,  벽 안에서 발견될 확률 = {p*100:.2f}%")
+    p = np.sum(v[outside] ** 2) / np.sum(v**2)
+    print(f"n = {k+1}: E = {E[k]:.3f} eV,  벽 안에서 발견될 확률 = {p*100:.2f}%")
 ```
 ```
-n=1: E=0.272 eV,  벽 안에서 발견될 확률 = 0.83%
-n=2: E=1.079 eV,  벽 안에서 발견될 확률 = 3.55%
-n=3: E=2.382 eV,  벽 안에서 발견될 확률 = 9.26%
+n = 1: E = 0.263 eV,  벽 안에서 발견될 확률 = 1.10%
+n = 2: E = 1.038 eV,  벽 안에서 발견될 확률 = 4.80%
+n = 3: E = 2.273 eV,  벽 안에서 발견될 확률 = 13.02%
 ```
 
-$n=3$이면 거의 10%입니다. 고전적으로는 절대 있을 수 없는 자리에 전자가 10번 중 한 번 정도는 발견된다는 뜻이죠. 그리고 에너지가 높을수록 확률이 커집니다.    
+$n=3$이면 13%가 넘습니다! 고전적으로는 절대 있을 수 없는 위치에서 전자가 8번 중 한 번 정도는 발견된다는 뜻이죠. 그리고 에너지가 높을수록 확률이 커집니다.    
 *그러면 에너지 보존은 어떻게 되나요?* 벽 안에서 전자의 퍼텐셜 에너지가 전체 에너지보다 크니, 운동에너지가 음수여야 할 것 같습니다. 말이 안 되죠.  
 사실 이 질문 자체가 성립하지 않습니다. 2.4절에서 봤듯이 전자는 위치와 운동량을 동시에 정해진 값으로 갖지 않습니다. "벽 안에 있을 때의 운동에너지"라는 것을 따로 떼어 말할 수 없죠. 우리가 말할 수 있는 것은 전체 상태의 에너지 하나뿐이고, 그건 제대로 보존됩니다.
 
@@ -85,16 +93,16 @@ $n=3$이면 거의 10%입니다. 고전적으로는 절대 있을 수 없는 자
   양쪽 그림을 비교해보면 오른쪽 그림에서 에너지가 조금 더 낮아진 것이 보입니다. 직접 숫자로 확인해보죠.
 
 ```python
-x, E, psi = solve(N, L, well(5.0))
+x, E, psi = solve(N, L, well(4.0))
 
 for n in range(1, 4):
-    infinite = n**2 * h**2/(8*m_e*w**2) / e
-    print(f"n={n}:  무한 우물 {infinite:7.4f} eV   유한 우물 {E[n-1]:7.4f} eV")
+    infinite = n**2 * h**2 / (8 * m_e * w**2) / e
+    print(f"n = {n}: 무한 우물 {infinite:7.4f} eV  유한 우물 {E[n-1]:7.4f} eV")
 ```
 ```
-n=1:  무한 우물  0.3760 eV   유한 우물  0.2722 eV
-n=2:  무한 우물  1.5041 eV   유한 우물  1.0788 eV
-n=3:  무한 우물  3.3843 eV   유한 우물  2.3822 eV
+n = 1: 무한 우물  0.3760 eV  유한 우물  0.2626 eV
+n = 2: 무한 우물  1.5041 eV  유한 우물  1.0376 eV
+n = 3: 무한 우물  3.3843 eV  유한 우물  2.2726 eV
 ```
 
 전부 낮아졌습니다. 이유는 4.1절의 결과에 있습니다. $E \propto \frac{1}{L^2}$이었죠. 전자가 벽 안으로 조금 새어 나가면 상자가 넓어진 셈이고, 그러면 에너지가 내려갑니다. 4.2절에서 시아닌 염료의 흡수를 계산할 때 예측 파장이 전부 실측보다 짧게 나왔었죠. 상자를 너무 짧게 잡았기 때문이라고 했고요. 지금 보고 있는 것이 바로 그 현상입니다. 실제 분자의 벽은 무한히 높지 않으니 전자가 조금씩 새어 나가고, 그래서 상자의 유효 길이가 우리가 잡은 것보다 넓었던 겁니다.
@@ -105,17 +113,17 @@ n=3:  무한 우물  3.3843 eV   유한 우물  2.3822 eV
 유한 우물에서는 우물의 벽보다 에너지가 낮은 상태와 높은 상태가 다르게 나타날 것 같습니다. 에너지가 낮아 우물 안에 갇혀 있는 상태를 **속박 상태(bound state)**라고 부릅니다.
 
 ```python
-for V0 in [1, 3, 5, 10, 30]:
+for V0 in [1, 3, 5, 10, 20]:
     x, E, psi = solve(N, L, well(V0))
     bound = E[E < V0]
-    print(f"V0={V0:3d} eV : 속박 준위 {len(bound)}개   {np.round(bound[:4], 3)}")
+    print(f"V0 = {V0:2d} eV: 속박 준위 {len(bound)}개 - {np.round(bound, 3)}")
 ```
 ```
-V0=  1 eV : 속박 준위 2개   [0.191 0.704]
-V0=  3 eV : 속박 준위 3개   [0.249 0.98  2.11 ]
-V0=  5 eV : 속박 준위 4개   [0.272 1.079 2.382 4.064]
-V0= 10 eV : 속박 준위 6개   [0.298 1.188 2.655 4.669]
-V0= 30 eV : 속박 준위 9개   [0.328 1.311 2.946 5.227]
+V0 =  1 eV: 속박 준위 2개 - [0.191 0.704]
+V0 =  3 eV: 속박 준위 3개 - [0.249 0.98  2.11 ]
+V0 =  5 eV: 속박 준위 4개 - [0.272 1.079 2.382 4.064]
+V0 = 10 eV: 속박 준위 6개 - [0.298 1.188 2.655 4.669 7.153 9.777]
+V0 = 20 eV: 속박 준위 8개 - [ 0.318  1.272  2.855  5.057  7.86  11.228 15.086 19.15 ]
 ```
 
 벽보다 에너지가 높은 상태는 우물에 갇혀 있지 않습니다. 그런 전자는 그냥 지나가버리죠. 그래서 우물에 묶여 있는 속박 상태의 개수가 유한합니다. 벽을 높일수록 속박 준위가 늘어나고, 무한대로 보내면 무한히 많아집니다. 우리가 4.1절에서 다룬 것이 그 극한이었던 셈이죠.
@@ -126,54 +134,58 @@ V0= 30 eV : 속박 준위 9개   [0.328 1.311 2.946 5.227]
 이제 재미있는 걸 해봅시다. 우물을 두 개 놓고 그 사이를 얇은 벽으로 막으면 어떻게 될까요?
 
 ```python
-L2, N2, V0 = 6e-9, 1500, 5.0
+L2, N2, V0 = 6e-9, 1500, 4.0
+
 
 def double_well(barrier_w):
     def V(x):
-        out = np.full_like(x, V0*e)
-        for center in [L2/2 - barrier_w/2 - w/2, L2/2 + barrier_w/2 + w/2]:
-            out[np.abs(x - center) < w/2] = 0.0
+        out = np.full_like(x, V0 * e)
+        for center in [L2 / 2 - barrier_w / 2 - w / 2, L2 / 2 + barrier_w / 2 + w / 2]:
+            out[np.abs(x - center) < w / 2] = 0.0
         return out
+
     return V
+
 
 fig, axes = plt.subplots(1, 3, figsize=(13, 4))
 
 for ax, bw_nm in zip(axes, [0.2, 0.6, 1.5]):
-    Vf = double_well(bw_nm*1e-9)
+    Vf = double_well(bw_nm * 1e-9)
     x, E, psi = solve(N2, L2, Vf)
-    ax.plot(x*1e9, np.clip(Vf(x)/e, 0, 1.15), color="black", lw=1.6)
+    ax.plot(x * 1e9, np.clip(Vf(x) / e, 0, 1.15), color="black", lw=1.6)
     for k, col in zip([0, 1], ["crimson", "steelblue"]):
         v = psi[:, k]
         if v[np.argmax(np.abs(v))] < 0:
             v = -v
-        ax.hlines(E[k], 0, L2*1e9, color="gray", lw=0.7, ls=":")
-        ax.plot(x*1e9, E[k] + 0.25*v/np.abs(v).max(), lw=1.8, color=col)
-    ax.set_xlim(1.2, 4.8); ax.set_ylim(-0.1, 1.2)
+        ax.hlines(E[k], 0, L2 * 1e9, color="gray", lw=0.7, ls=":")
+        ax.plot(x * 1e9, E[k] + 0.25 * v / np.abs(v).max(), lw=1.8, color=col)
+    ax.set_xlim(1, 5)
+    ax.set_ylim(0, 1.2)
     ax.set_xlabel("x (nm)")
     ax.set_title(f"barrier {bw_nm} nm\nsplit = {(E[1]-E[0])*1000:.2f} meV", fontsize=11)
 
 axes[0].set_ylabel("E (eV)")
 plt.show()
 ```
+![이중 우물에서의 갈라짐](/assets/image-51.png)
 
 바닥상태가 둘로 갈라집니다! 우물이 하나였다면 바닥상태는 하나였을 겁니다. 그런데 두 개를 놓으면 두 개가 나오죠. 하나는 양쪽 우물에서 같은 부호로 출렁이고(대칭), 다른 하나는 반대 부호로 출렁입니다(반대칭). 그리고 둘의 에너지가 살짝 다릅니다. 갈라지는 정도를 계산해보면 이렇습니다.
 
 ```python
-print(f"{'장벽(nm)':>10} {'E1(eV)':>9} {'E2(eV)':>9} {'갈라짐(meV)':>13}")
+print(f"{'장벽(nm)':>6} {'E1(eV)':>8} {'E2(eV)':>9} {'갈라짐(meV)':>10}")
 for bw_nm in [0.2, 0.4, 0.6, 0.8, 1.2]:
-    x, E, psi = solve(N2, L2, double_well(bw_nm*1e-9))
-    print(f"{bw_nm:10.1f} {E[0]:9.4f} {E[1]:9.4f} {(E[1]-E[0])*1000:13.3f}")
+    x, E, psi = solve(N2, L2, double_well(bw_nm * 1e-9))
+    print(f"{bw_nm:6.1f} {E[0]:9.4f} {E[1]:9.4f} {(E[1]-E[0])*1000:12.3f}")
 ```
 ```
-   장벽(nm)    E1(eV)    E2(eV)    갈라짐(meV)
-       0.2    0.2630    0.2800        16.996
-       0.4    0.2712    0.2730         1.826
-       0.6    0.2720    0.2722         0.197
-       0.8    0.2721    0.2721         0.021
-       1.2    0.2721    0.2721         0.000
+장벽(nm)   E1(eV)    E2(eV)   갈라짐(meV)
+   0.2    0.2501    0.2730       22.932
+   0.4    0.2610    0.2641        3.149
+   0.6    0.2623    0.2628        0.435
+   0.8    0.2625    0.2626        0.060
+   1.2    0.2625    0.2625        0.001
 ```
-
-벽이 0.2 nm씩 두꺼워질 때마다 거의 10배씩 줄어들어 갈라짐이 지수적으로 감소하고 있습니다.
+벽이 0.2 nm씩 두꺼워질 때마다 거의 7~9배씩 줄어들면서 갈라짐이 지수적으로 감소하고 있습니다.
 
 그런데 두 준위가 갈라진다는 것은 무엇을 의미할까요? 전자를 왼쪽 우물에만 넣어놓고 시작한다고 합시다. 그 상태는 대칭 상태와 반대칭 상태를 반반 섞은 것입니다. 그런데 두 상태의 에너지가 다르니 시간이 지나면서 위상이 어긋나고, 결국 전자가 오른쪽 우물로 옮겨갑니다. 그리고 다시 왼쪽으로 돌아오죠. 이 왕복 주기는 갈라짐 정도 $\Delta E$로 정해집니다.
 
@@ -183,17 +195,22 @@ $$
 
 ```python
 for bw_nm in [0.2, 0.6, 1.2]:
-    x, E, psi = solve(N2, L2, double_well(bw_nm*1e-9))
+    x, E, psi = solve(N2, L2, double_well(bw_nm * 1e-9))
     dE = (E[1] - E[0]) * e
-    print(f"장벽 {bw_nm} nm : 갈라짐 {dE/e*1000:8.3f} meV  ->  왕복 주기 {h/dE*1e12:12.4f} ps")
+    print(
+        f"장벽 {bw_nm} nm : 갈라짐 {dE/e*1000:7.3f} meV  ->  왕복 주기 {h/dE*1e12:10.4f} ps"
+    )
 ```
 ```
-장벽 0.2 nm : 갈라짐   16.996 meV  ->  왕복 주기       0.2433 ps
-장벽 0.6 nm : 갈라짐    0.197 meV  ->  왕복 주기      20.9834 ps
-장벽 1.2 nm : 갈라짐    0.000 meV  ->  왕복 주기   16689.6405 ps
+장벽 0.2 nm : 갈라짐  22.932 meV  ->  왕복 주기     0.1803 ps
+장벽 0.6 nm : 갈라짐   0.435 meV  ->  왕복 주기     9.5083 ps
+장벽 1.2 nm : 갈라짐   0.001 meV  ->  왕복 주기  3606.2896 ps
 ```
+벽이 0.2 nm면 0.18 피코초 만에 건너가는데, 1.2 nm면 약 4 나노초가 걸립니다. 벽이 여섯 배 두꺼워졌을 뿐인데 시간은 20000배 늘었죠. 이것이 터널링이 거리에 극도로 민감한 이유입니다.
 
-벽이 0.2 nm면 0.24 피코초 만에 건너가는데, 1.2 nm면 16 나노초가 걸립니다. 벽이 여섯 배 두꺼워졌을 뿐인데 시간은 7만 배 늘었죠. 이것이 터널링이 거리에 극도로 민감한 이유입니다.
+[[TIP]]
+반대칭 상태의 파동함수가 첫 번째와 두 번째 그림에서는 오른쪽 우물에서 위로 솟아 있는데 세 번째 그림에서는 왼쪽 우물에서 위로 솟아 있습니다. 이것은 잘못 계산된 것이 아니라 `eigh` 함수가 반환해주는 파동함수가 둘 중에 어느 쪽을 반환할지 정해져 있지 않기 때문입니다. 당연히 다른 그림들처럼 오른쪽 우물에서 솟은 함수도 해가 됩니다.
+[[/TIP]]
 
 
 ## 실제로 일어나는 일들
@@ -204,13 +221,13 @@ NH₃는 삼각뿔 모양인데, 질소가 수소 삼각형의 위에 있을 수
 ```python
 nu = 23.786e9
 print(f"NH3 반전: 진동수 {nu/1e9:.3f} GHz")
-print(f"          준위 갈라짐 {h*nu/e*1000:.5f} meV")
-print(f"          왕복 주기 {1/nu*1e12:.2f} ps")
+print(f"         준위 갈라짐 {h*nu/e*1000:.5f} meV")
+print(f"         왕복 주기 {1/nu*1e12:.2f} ps")
 ```
 ```
 NH3 반전: 진동수 23.786 GHz
-          준위 갈라짐 0.09837 meV
-          왕복 주기 42.04 ps
+         준위 갈라짐 0.09837 meV
+         왕복 주기 42.04 ps
 ```
 
 갈라짐이 0.1 meV 수준입니다. 우리가 방금 계산한 이중 우물의 0.6 nm 장벽과 비슷한 규모죠. 그리고 이 현상은 메이저(maser) 장비의 기반이 되었습니다. 그리고 메이저는 훗날 레이저(laser)의 개발에 초석이 되었습니다.
