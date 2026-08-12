@@ -88,11 +88,59 @@ $$
 그리고 0.2.3에서 만든 미분 행렬을 씁시다.
 
 ```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.constants import hbar, m_e, e
 
+L, N = 1e-9, 2000
+dx = L / (N + 1)
+x = np.linspace(0, L, N + 2)[1:-1]
+
+
+def D1(N, dx):
+    return (np.eye(N, k=1) - np.eye(N, k=-1)) / (2 * dx)
+
+
+def D2(N, dx):
+    return (-2 * np.eye(N) + np.eye(N, k=1) + np.eye(N, k=-1)) / dx**2
+
+
+psi = np.sqrt(2 / L) * np.sin(np.pi * x / L)
 ```
 이제 세 연산자들을 각각 적용해봅시다.
 ```
+x_psi = x * psi
+p_psi = -1j * hbar * (D1(N, dx) @ psi)
+T_psi = -(hbar**2) / (2 * m_e) * (D2(N, dx) @ psi)
 
+fig, axes = plt.subplots(1, 3, figsize=(13, 4))
+
+axes[0].plot(x * 1e9, psi / psi.max(), color="black", lw=2, label="psi")
+axes[0].plot(
+    x * 1e9, x_psi / x_psi.max(), color="crimson", lw=2, label="x psi (scaled)"
+    )
+axes[0].set_title("position")
+
+axes[1].plot(x * 1e9, psi / psi.max(), color="black", lw=2, label="psi")
+axes[1].plot(
+    x * 1e9, p_psi.imag / np.abs(p_psi).max(), color="steelblue", lw=2, label="Im(p psi) (scaled)"
+)
+axes[1].set_title("momentum")
+
+axes[2].plot(x * 1e9, psi / psi.max(), color="black", lw=2, label="psi")
+axes[2].plot(
+    x * 1e9, T_psi / T_psi.max(), color="seagreen", lw=2, ls="--", label="T psi (scaled)"
+)
+axes[2].set_title("kinetic energy")
+
+for ax in axes:
+    ax.axhline(0, color="gray", lw=0.6)
+    ax.set_xlim(0, 1)
+    ax.set_xlabel("x (nm)")
+    ax.set_yticks([])
+    ax.legend(fontsize=8)
+
+plt.show()
 ```
 ![위치, 운동량, 에너지 연산자](/assets/image-52.png)
 
@@ -100,15 +148,22 @@ $$
 
 운동량 연산자는 사인 함수가 코사인 함수가 되어 모양이 완전히 바뀌었습니다. 그리고 실수부가 0인 순허수 값으로 나타났습니다.  
 
-운동에너지 연산자는 원래 함수와 정확히 똑같은 모양이 되었습니다! 점선과 실선이 완전히 겹쳐 있죠. 숫자로도 확인해봅시다.
+운동에너지 연산자는 원래 함수와 정확히 똑같은 모양이 되었습니다! 물론 크기는 달라졌지만요. 그림에서는 일부러 모양이 같다는 것을 보기 위해 비율을 맞춰서 그렸습니다.  
+이게 무슨 뜻이었죠? 바로 고유함수라는 뜻이었습니다. 행렬을 곱해도 방향이 안 바뀌는 고유벡터와 마찬가지로 연산자를 적용해도 모양이 바뀌지 않는 함수죠. 그런데 크기가 얼마나 달라진 걸까요?
 ```python
+ratio = (T_psi / psi) / e
+print(f"T psi / psi = {ratio.mean():.6f} eV (표준편차 {ratio.std():.2e})")
 
+E1 = np.pi**2 * hbar**2 / (2 * m_e * L**2) / e
+print(f"해석해 E1    = {E1:.6f} eV")
 ```
 ```
+T psi / psi = 0.376030 eV (표준편차 2.59e-09)
+해석해 E1    = 0.376030 eV
+```
+그리고 그 비율은 4.1절에서 손으로 구했던 바닥상태의 에너지와 정확히 같습니다. Schrödinger 방정식($\hat{H}\psi=E\psi$)을 고유값 문제로 보면 에너지가 고유값으로 나타난다고 했었습니다. 지금 그 고유값이 나온 겁니다. 상자 안에서는 $V=0$이어서 $H=T$가 되거든요.  
 
-```
-이게 무슨 뜻이었죠? 바로 고유함수라는 뜻이었습니다. 행렬을 곱해도 방향이 안 바뀌는 고유벡터와 마찬가지로 연산자를 적용해도 모양이 바뀌지 않는 함수죠. 그리고 그 비율은 4.1절에서 손으로 구했던 바닥상태의 에너지와 정확히 같습니다. 상자 안에서는 $V=0$이어서 $H=T$가 되거든요.  
-위치와 운동량은 고유함수가 아니었습니다. 이 차이가 무슨 일을 만드는지는 다음 절에서 보게 될 것입니다.
+하지만 위치와 운동량은 고유함수가 아니었습니다. 이 차이가 무슨 일을 만드는지는 다음 절에서 보게 될 것입니다.
 
 
 ## 어어 새치기는 안된다
@@ -120,4 +175,16 @@ $$
 [\hat{A}, \hat{B}] = \hat{A}\hat{B} - \hat{B}\hat{A}
 $$
 
-이것을 **교환자(commutator)**라고 부릅니다. 그러니까, 즉, 어떤 함수에 B 연산자를 먼저 적용하고 A 연산자를 적용한 결과에서 A 연산자를 먼저 적용하고 B 연산자를 적용한 결과를 뺀 거죠.
+이것을 **교환자(commutator)**라고 부릅니다. 그러니까, 즉, 어떤 함수에 B 연산자를 먼저 적용하고 A 연산자를 적용한 결과에서 A 연산자를 먼저 적용하고 B 연산자를 적용한 결과를 뺀 거죠. 이 값이 모든 함수에 대해 0이라면 두 연산자는 **교환가능(commutable)**하다고 말합니다.  
+
+
+## 다음 이야기
+
+양자역학에서의 연산자에 대해 알아보았습니다. 그런데 아무 연산자나 가져와도 선형이기만 하면 될까요? 연산자에 대체 무슨 의미가 있는 걸까요? 운동량 연산자는 순허수 값을 갖는데 이게 무슨 뜻일까요? 다음 절에서 이 질문들에 답해보겠습니다.
+
+
+## 확인 문제
+1. $\hat{p}$를 상자 속 입자의 $n=2$ 상태에 적용해보세요. 결과가 어떻게 나타나나요?
+2. $\hat{T}$를 상자 속 입자의 $n=2, 3$ 상태에 적용하고 원래 함수와의 비율을 구해보세요. 4.1절에서 손으로 구했던 에너지 값과 같나요? (주의: 마디 근처에서는 값이 너무 작아 나눗셈이 불안정해질 수 있습니다. 충분히 큰 점들만 골라서 평균을 내보세요.)
+3. 자유 전자의 파동을 나타내는 함수 $e^{ikx}$는 $\hat{p}$의 고유함수입니다. 직접 확인해보고 고유값이 얼마인지 계산해보세요.
+4. 두 연산자 $\hat{A}=\frac{d}{dx}$와 $\hat{B}=x^2$에 대해 교환자를 구해보세요. 이 연산자들은 교환가능한가요?
