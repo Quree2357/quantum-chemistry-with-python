@@ -35,6 +35,6 @@
   * [4.5. 벽을 뚫고 나가다](pages/04-05-tunneling.md)
 * [5. 연산자와 측정](pages/05-operators.md)
   * [5.1. 연산자란 무엇인가](pages/05-01-what-are-operators.md)
-  * [5.2. 에르미트 연산자와 측정값](pages/05-02-hermitian-operators.md)
+  * [5.2. 에르미트 연산자와 브라켓 표기법](pages/05-02-hermitian-operators.md)
   * [5.3. 측정에서 얻는 것](pages/05-03-measurement.md)
   * [5.4. 교환자와 불확정성](pages/05-04-commutator.md)

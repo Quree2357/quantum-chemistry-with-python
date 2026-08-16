@@ -1,4 +1,4 @@
-# 5.2. 에르미트 연산자와 측정값
+# 5.2. 에르미트 연산자와 브라켓 표기법
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/05-02.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
@@ -12,7 +12,7 @@
 연산자에도 같은 개념이 있습니다. 다음 관계가 모든 함수 $f$와 $g$에 대해 성립하면 $\hat{A}$를 **에르미트 연산자(Hermitian operator)**라고 부릅니다.
 
 $$
-\int f^*\hat{A} g \space dx = \int \left(\hat{A}^* f^* \right) g \space dx = \int \left(\hat{A} f \right)^* g \space dx
+\int f^*\hat{A} g \, dx = \int \left(\hat{A} f \right)^* g \, dx
 $$
 
 그리고 행렬에서와 똑같은 결론이 따라옵니다.
@@ -27,7 +27,7 @@ $$
 양자역학에서는 위와 비슷한 적분식이 하도 많이 나와서 매번 귀찮은 적분과 $dx$ 기호를 쓰는 대신 아예 다음과 같이 줄여서 표기합니다.
 
 $$
-\langle f | g \rangle \equiv \int f^* g \space dx
+\langle f | g \rangle \equiv \int f^* g \, dx
 $$
 
 이 표기법은 Dirac이 만들어서 **Dirac 표기법** 또는 **브라켓 표기법(bra-ket notation)**이라고 부릅니다. 이름의 유래는 예상하셨겠지만, 괄호를 뜻하는 영어 단어 bracket입니다. 이 단어를 반으로 쪼개서, 왼쪽 $\langle f|$를 **브라(bra)**, 오른쪽 $|g\rangle$를 **켓(ket)**이라고 부릅니다.
@@ -37,7 +37,7 @@ $$
 만약 중간에 연산자가 끼어 있는 경우에는 이렇게 씁니다.
 
 $$
-\langle f | \hat{A} | g \rangle \equiv \int f^* \hat{A} g \space dx
+\langle f | \hat{A} | g \rangle \equiv \int f^* \hat{A} g \, dx
 $$
 
 그러면 에르미트 조건을 훨씬 짧고 깔끔하게 쓸 수 있습니다.
@@ -52,11 +52,11 @@ $$
 
 | 유한차원 | 무한차원 |
 |---|---|
-| 벡터 $\mathbf{v}$ | 켓 $\| f \rangle$ |
-| 내적 $\langle \mathbf{u}, \mathbf{v} \rangle$ | $\langle f \| g \rangle$ |
+| 벡터 $\mathbf{v}$ | 켓 $| f \rangle$ |
+| 내적 $\langle \mathbf{u}, \mathbf{v} \rangle$ | $\langle f | g \rangle$ |
 | 행렬 $A$ | 연산자 $\hat{A}$ |
 | 에르미트 행렬 | 에르미트 연산자 |
-| $A\mathbf{v} = \lambda \mathbf{v}$ | $\hat{A} \| f \rangle = a \| f \rangle$ |
+| $A\mathbf{v} = \lambda \mathbf{v}$ | $\hat{A} | f \rangle = a | f \rangle$ |
 
 
 ## 왜 운동량 연산자에는 허수가 붙나
@@ -72,13 +72,13 @@ $$
 부분적분 공식을 쓰면 다음과 같습니다.
 
 $$
-= \Big[f^*g\Big]_{-\infty}^{\infty} - \int \left( \frac{d}{dx} f^* \right) g \space dx
+= \Big[f^*g\Big]_{-\infty}^{\infty} - \int \left( \frac{d}{dx} f^* \right) g \, dx
 $$
 
 파동함수는 무한대에서 0이 되어야 하니까 첫 항은 0이 되겠네요. (파동함수가 무한대에서 0이 되지 않으면 적분값이 발산하게 됩니다. 3.4절의 조건을 떠올려보세요.) 그러면 이렇게 됩니다.
 
 $$
-\int f^* \left( \frac{d}{dx}g \right) dx = -\int \left(\frac{d}{dx} f \right)^* g \space dx
+\int f^* \left( \frac{d}{dx}g \right) dx = -\int \left(\frac{d}{dx} f \right)^* g \, dx
 $$
 
 앗, 에르미트가 되려면 부호가 같아야 하는데 반대가 되어버렸습니다! 이런 경우를 반에르미트(anti-Hermitian)라고 부릅니다.
@@ -86,7 +86,7 @@ $$
 만약 처음에 $-i\hbar$가 곱해져 있었다면 어떻게 될까요? 부분적분을 하면서 부호가 반대가 되지만 켤레를 씌울 때 다시 부호가 바뀌니 제자리로 돌아옵니다.
 
 $$
-\int f^* \left(-i\hbar \frac{d}{dx} g \right) dx = \int \left(i\hbar \frac{d}{dx} f^* \right) g \space dx = \int \left(-i\hbar \frac{d}{dx} f \right)^* g \space dx
+\int f^* \left(-i\hbar \frac{d}{dx} g \right) dx = \int \left(i\hbar \frac{d}{dx} f^* \right) g \, dx = \int \left(-i\hbar \frac{d}{dx} f \right)^* g \, dx
 $$
 
 $\hat{p} = -i\hbar \frac{d}{dx}$는 에르미트 연산자라는 것을 확인했습니다!
@@ -128,13 +128,13 @@ def check(M, name):
 check(X, "x")
 check(P, "p")
 check(T, "T")
-check(D1, "D1 (i 없이)")
+check(D1, "D1 (without i)")
 ```
 ```
 x              |M - M^dagger| = 0.000e+00   에르미트? True
 p              |M - M^dagger| = 0.000e+00   에르미트? True
 T              |M - M^dagger| = 0.000e+00   에르미트? True
-D1 (i 없이)      |M - M^dagger| = 1.001e+12   에르미트? False
+D1 (without i) |M - M^dagger| = 1.001e+12   에르미트? False
 ```
 
 위에서 본 것처럼 $D_1$은 에르미트가 아닙니다. 그런데 여기에 $-i\hbar$를 곱한 $\hat{p}$는 에르미트죠.
