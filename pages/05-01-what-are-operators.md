@@ -76,7 +76,7 @@ $$
 \hat{H} = \hat{T} + \hat{V} = -\frac{\hbar^2}{2m}\frac{d^2}{dx^2} + V(x)
 $$
 
-앗, 뭔가 규칙이 보이시지 않나요? 고전역학의 표현에서 $x \to \hat{x}$로, $p \to \hat{p}$로 바꾸면 양자역학의 연산자 표현이 되네요! 각운동량 $L=xp$도 마찬가지로 양자역학에서는 각운동량 연산자 $\hat{L}=\hat{x}\hat{p}$가 됩니다.  
+앗, 뭔가 규칙이 보이시지 않나요? 고전역학의 표현에서 $x \to \hat{x}$로, $p \to \hat{p}$로 바꾸면 양자역학의 연산자 표현이 되네요! 각운동량 $\mathbf{L}=\mathbf{x}\times\mathbf{p}$도 마찬가지로 양자역학에서는 각운동량 연산자 $\mathbf{\hat{L}}=\mathbf{\hat{x}}\times\mathbf{\hat{p}}$가 됩니다.  
 
 
 ## 직접 눈으로 확인해보기
