@@ -1,5 +1,7 @@
 # 5.1. 연산자란 무엇인가
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/05-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 0.2절 도입부에서 연산자(operator)는 함수를 다른 함수로 바꿔주는 것이라고 했었습니다. 그리고 선형 연산자는 행렬로 쓸 수 있기 때문에 미분 연산자를 행렬로 써봤고요. Schrödinger 방정식에서는 Hamiltonian이라는 연산자가 등장했었습니다. 그런데 연산자는 사실 단순한 함수 변환기 그 이상의 의미를 가지고 있습니다. 이번에는 연산자에 대해서 더 자세히 알아보도록 하죠.
 
 
