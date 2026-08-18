@@ -1,5 +1,7 @@
 # 6.1. 고전 조화진동자
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/06-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 분자의 결합을 용수철로 모델링하는 것을 조화진동자 모델이라고 합니다. 실제로 원자 사이에 용수철 같은 게 연결되어 있는 것은 아니지만 원자를 구성하는 원자핵과 전자 간의 전기적 힘에 의해 발생하는 진동은 용수철 모델로 잘 근사할 수 있습니다. 먼저 고전적인 조화진동자 모델을 살펴보도록 하죠. 이 모델이 왜 분자의 진동을 잘 설명할 수 있는지도 함께 확인해볼게요.
 
 
