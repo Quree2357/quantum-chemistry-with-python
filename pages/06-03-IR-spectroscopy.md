@@ -1,5 +1,8 @@
 # 6.3. 진동과 적외선 분광학
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/06-03.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
+
 양자 조화진동자에서는 에너지 준위의 간격이 $\hbar\omega$로 일정하다는 것을 확인했습니다. 이 사실은 무엇을 의미할까요? 앞 절의 확인 문제 4번의 답을 여기서 말씀드리자면 바로 분자가 흡수하는 빛의 진동수가 하나뿐이라는 뜻입니다. 나중에 배우겠지만 양자 조화진동자에서 각 준위 사이를 왔다 갔다 할 때 항상 바로 위, 아니면 바로 밑 준위로만 넘어갈 수 있습니다. 식으로 쓰면 $\Delta v=\pm 1$가 되죠. 이것을 **선택 규칙(selection rule)**이라고 부릅니다.  
 $v=0$에서 $v=1$로 올라가든 $v=1$에서 $v=2$로 올라가든 $v=42$에서 $v=43$로 올라가든 필요한 에너지가 같으니 딱 이 에너지에 해당하는 진동수의 빛만 흡수할 수 있게 됩니다. 이를 이용한 것이 바로 적외선 분광학(IR spectroscopy)이죠.
 
