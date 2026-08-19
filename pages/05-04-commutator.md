@@ -33,7 +33,7 @@ def psi(n):
     return np.sqrt(2 / L) * np.sin(n * np.pi * xg / L)
 
 
-print(f"{'n':>2} {'σx/L':>9} {'σp (h/L)':>10} {'σx * σp (hbar)':>15}")
+print(f"{'n':>2} {'σx/L':>9} {'σp (hbar/L)':>13} {'σx * σp (hbar)':>15}")
 for n in [1, 2, 3, 4, 5]:
     p = psi(n)
     x_mean = np.trapezoid(p * xg * p, xg)
@@ -42,15 +42,15 @@ for n in [1, 2, 3, 4, 5]:
 
     sigma_x = np.sqrt(x2_mean - x_mean**2)
     sigma_p = np.sqrt(p2_mean)  # <p> = 0 이므로
-    print(f"{n:2d} {sigma_x/L:9.4f} {sigma_p/(hbar/L):10.4f} {sigma_x * sigma_p/hbar:15.4f}")
+    print(f"{n:2d} {sigma_x/L:9.4f} {sigma_p/(hbar/L):13.4f} {sigma_x * sigma_p/hbar:15.4f}")
 ```
 ```
- n      σx/L   σp (h/L)  σx * σp (hbar)
- 1    0.1808     3.1416          0.5679
- 2    0.2658     6.2832          1.6703
- 3    0.2788     9.4248          2.6272
- 4    0.2831    12.5664          3.5580
- 5    0.2851    15.7079          4.4790
+ n      σx/L   σp (hbar/L)  σx * σp (hbar)
+ 1    0.1808        3.1416          0.5679
+ 2    0.2658        6.2832          1.6703
+ 3    0.2788        9.4248          2.6272
+ 4    0.2831       12.5664          3.5580
+ 5    0.2851       15.7079          4.4790
 ```
 
 $\sigma_x \sigma_p$가 항상 $0.5\hbar$보다 큽니다. 그리고 바닥상태가 $0.568\hbar$로 가장 가깝죠. 2.4절에서 봤던 불확정성 원리와 같은 결론입니다.
