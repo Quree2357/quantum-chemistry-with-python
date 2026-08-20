@@ -43,3 +43,7 @@
   * [6.2. 양자 조화진동자](pages/06-02-quantum-harmonic-oscillator.md)
   * [6.3. 진동과 적외선 분광학](pages/06-03-IR-spectroscopy.md)
   * [6.4. 실제 이원자 분자](pages/06-04-diatomic-molecules.md)
+* [7. 회전과 각운동량](pages/07-rotational-motion.md)
+  * [7.1. 고리 위 입자](pages/07-01-particle-in-a-ring.md)
+  * [7.2. 구면 위 입자](pages/07-02-particle-in-a-sphere.md)
+  * [7.3. 강체 회전자](pages/07-03-rigid-rotator.md)
