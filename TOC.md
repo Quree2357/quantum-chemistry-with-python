@@ -46,4 +46,4 @@
 * [7. 회전과 각운동량](pages/07-rotational-motion.md)
   * [7.1. 고리 위 입자](pages/07-01-particle-in-a-ring.md)
   * [7.2. 구면 위 입자](pages/07-02-particle-in-a-sphere.md)
-  * [7.3. 강체 회전자](pages/07-03-rigid-rotator.md)
+  * [7.3. 강체 회전자](pages/07-03-rigid-rotor.md)
