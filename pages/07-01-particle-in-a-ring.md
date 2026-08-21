@@ -2,7 +2,7 @@
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/07-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
-1차원에서는 회전이 불가능하니 2차원의 경우부터 살펴봅시다. $xy$-평면에서 돌고 있는 입자를 생각하면 되겠네요. 조화진동자의 경우에서와 마찬가지로 입자 두 개가 결합하여 돌고 있는 것을 환산질량을 대입해서 입자가 한 개뿐인 문제로 바꿀 수 있습니다. 그러니까 그냥 질량 $m$인 입자가 반지름 $r$인 고리 위를 돌고 있다고 하죠. 고리 위에서는 퍼텐셜 에너지가 0이라고 가정하고 반지름도 변하지 않는다고 하겠습니다.
+1차원에서는 회전이 불가능하니 2차원의 경우부터 살펴봅시다. $xy$-평면에서 돌고 있는 입자를 생각하면 되겠네요. 조화 진동자의 경우에서와 마찬가지로 입자 두 개가 결합하여 돌고 있는 것을 환산질량을 대입해서 입자가 한 개뿐인 문제로 바꿀 수 있습니다. 그러니까 그냥 질량 $\mu$인 입자가 반지름 $r$인 고리 위를 돌고 있다고 하죠. 고리 위에서는 퍼텐셜 에너지가 0이라고 가정하고 반지름도 변하지 않는다고 하겠습니다.
 
 
 ## 원통과 Schrödinger 방정식
@@ -10,7 +10,7 @@
 회전 운동을 다룰 때에는 직교좌표계 대신 원통좌표계(cylindrical coordinates)를 사용하면 식을 더 깔끔하게 쓸 수 있습니다. 원통좌표계에서는 $z$축은 그대로 두고 $xy$-평면을 극좌표 형식으로 표현하여 $(r, \phi, z)$ 형태의 좌표로 나타냅니다. 이 좌표계에서는 Schrödinger 방정식이 다음과 같이 표현됩니다.
 
 $$
--\frac{\hbar^2}{2m} \left( \frac{1}{r}\frac{\partial}{\partial r} \left( r\frac{\partial}{\partial r} \right) + \frac{1}{r^2}\frac{\partial^2}{\partial \phi^2} + \frac{\partial^2}{\partial z^2} \right) \psi(r, \phi, z) = E\psi(r, \phi, z)
+-\frac{\hbar^2}{2\mu} \left( \frac{1}{r}\frac{\partial}{\partial r} \left( r\frac{\partial}{\partial r} \right) + \frac{1}{r^2}\frac{\partial^2}{\partial \phi^2} + \frac{\partial^2}{\partial z^2} \right) \psi(r, \phi, z) = E\psi(r, \phi, z)
 $$
 
 *이게 뭐가 깔끔해요! 더 복잡해진 거 아니에요?*  
@@ -19,10 +19,10 @@ $$
 그리고 잘 보세요, 반지름이 $r$로 고정되어 있는 상황이라 $r$에 대한 미분 항이 사라져 버립니다! 그리고 $xy$-평면 위에서 회전하는 거라 파동함수가 $z$ 성분에도 무관하고요. 따라서 다음과 같이 아주 간단하게 정리할 수 있습니다.
 
 $$
--\frac{\hbar^2}{2mr^2} \frac{d^2}{d \phi^2} \psi(\phi) = E\psi(\phi)
+-\frac{\hbar^2}{2\mu r^2} \frac{d^2}{d \phi^2} \psi(\phi) = E\psi(\phi)
 $$
 
-이제 파동함수는 $\phi$에만 의존하기 때문에 편미분이 그냥 미분으로 바뀌었습니다. 그리고 분모에 있는 $mr^2$은 일반물리학에서 봤던 관성모멘트(moment of inertia)라는 양이고, 보통 $I$라고 표기합니다.  
+이제 파동함수는 $\phi$에만 의존하기 때문에 편미분이 그냥 미분으로 바뀌었습니다. 그리고 분모에 있는 $\mu r^2$은 일반물리학에서 봤던 관성모멘트(moment of inertia)라는 양이고, 보통 $I$라고 표기합니다.  
 이렇게 썼더니 상자 속 입자의 경우와 정확히 똑같은 모양이 되었습니다. 우리는 이 방정식의 해를 아주 잘 알고 있죠.
 
 $$
