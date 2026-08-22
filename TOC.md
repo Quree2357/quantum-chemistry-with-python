@@ -12,7 +12,7 @@
     * [0.2.2. 수치적분](pages/00-02-02-integration.md)
     * [0.2.3. 미분 연산자와 행렬](pages/00-02-03-differential-operator.md)
     * [0.2.4. 미분방정식](pages/00-02-04-differential-equation.md)
-* [Part I. 양자역학 이론](pages/part-1-quantum-theory.md)
+* [Part I. 양자역학 이론](pages/00-03-quantum-theory.md)
 * [1. 양자역학의 탄생](pages/01-birth-of-quantum-mechanics.md)
   * [1.1. 흑체 복사와 자외선 파국](pages/01-01-blackbody-radiation.md)
   * [1.2. 광전 효과와 빛의 이중성](pages/01-02-photoelectric-effect.md)
