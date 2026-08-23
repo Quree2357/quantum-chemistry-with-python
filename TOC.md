@@ -48,4 +48,5 @@
     * [7.1. 고리 위 입자](pages/07-01-particle-in-a-ring.md)
     * [7.2. 구면 위 입자](pages/07-02-particle-in-a-sphere.md)
     * [7.3. 강체 회전자](pages/07-03-rigid-rotor.md)
+    * [7.4. 프로젝트 1 — 1차원 Schrödinger 방정식 solver](pages/07-04-project-1d-schrodinger-solver.md)
 * [Part II. 원자의 구조](pages/part-2-atomic-structure.md)
