@@ -19,7 +19,7 @@ $$
 \nabla^2 = \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial}{\partial r}\right) + \frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{r^2\sin^2\theta}\frac{\partial^2}{\partial\phi^2}
 $$
 
-어우... 제가 지금 뭘 보고 있는 거죠? 다행히 우리는 반지름이 고정되어 있으니 $r$에 대한 미분 항을 날려버릴 수 있습니다. 나머지 부분을 $1/r^2$으로 묶어서 Legendrian이라고 부르고 $\Lambda^2$이라고 씁니다.
+어우... 제가 지금 뭘 보고 있는 거죠? 다행히 우리는 반지름이 고정되어 있으니 $r$에 대한 미분 항을 날려버릴 수 있습니다. 나머지 부분을 $1/r^2$으로 묶어서 각도 Laplcaian, 또는 Legendrian이라고 부르고 $\Lambda^2$이라고 씁니다.
 
 $$
 \Lambda^2 = \frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2}{\partial\phi^2}
