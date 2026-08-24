@@ -55,7 +55,7 @@ def solve_1d(V, x, mass, periodic=False):
 주기적 경계조건이 두 줄로 처리됩니다. 행렬의 오른쪽 위와 왼쪽 아래 구석에 값을 넣어 첫 격자점과 마지막 격자점을 이웃으로 만드는 것이죠.
 
 $$
-D_2^{\text{고리}} = \frac{1}{h^2}\begin{pmatrix}
+D_2^{\text{고리}} = \frac{1}{dx^2}\begin{pmatrix}
 -2 & 1 & 0 & \cdots & \boxed{1} \\
 1 & -2 & 1 & \cdots & 0 \\
 0 & 1 & -2 & \cdots & 0 \\
@@ -67,10 +67,10 @@ $$
 
 ## Solver 코드 검증하기
 
-4.4절에서 강조했던 원칙입니다. 새 도구를 만들면 답을 아는 문제로 먼저 확인합니다.
+4.4절에서 강조했던 원칙입니다. 새 도구를 만들면 답을 아는 문제로 먼저 확인합니다. 우리가 해석적으로 해를 정확히 구할 수 있었던 상자 속 입자, 조화 진동자, 고리 위 입자, 이 세 가지 경우로 살펴보죠.
 
 ```python
-N = 2000
+N = 1000
 
 # (1) 무한 우물
 L = 1e-9
@@ -80,18 +80,18 @@ E, psi = solve_1d(np.zeros(N), x, m_e)
 print("=== 무한 우물 (L = 1 nm) ===")
 for n in range(1, 4):
     exact = n**2 * h**2 / (8 * m_e * L**2) / e
-    print(f"n = {n}: {E[n-1]/e:9.5f} eV   (해석해 {exact:.5f})")
+    print(f"n = {n}: {E[n-1] / e:9.5f} eV   (해석해 {exact:.5f})")
 
-# (2) 조화진동자
+# (2) 조화 진동자
 k_f, mu = 572.0, 0.504 * u
 omega = np.sqrt(k_f / mu)
 xh = np.linspace(-5e-11, 5e-11, N + 2)[1:-1]
 E, psi = solve_1d(0.5 * k_f * xh**2, xh, mu)
 
-print("\n=== 조화진동자 (H2) ===")
+print("\n=== 조화 진동자 (H2) ===")
 for v in range(3):
     exact = (v + 0.5) * hbar * omega / e
-    print(f"v = {v}: {E[v]/e:9.5f} eV   (해석해 {exact:.5f})")
+    print(f"v = {v}: {E[v] / e:9.5f} eV   (해석해 {exact:.5f})")
 
 # (3) 고리
 r = 1e-10
@@ -102,18 +102,18 @@ E, psi = solve_1d(np.zeros(len(phi)), phi, I, periodic=True)
 print("\n=== 고리 (r = 1 A) ===")
 for i, m in enumerate([0, 1, -1, 2, -2]):
     exact = m**2 * hbar**2 / (2 * I) / e
-    print(f"{i}번째: {E[i]/e:9.5f} eV   (m={m}, 해석해 {exact:.5f})")
+    print(f"{i}번째: {E[i] / e:9.5f} eV   (m={m}, 해석해 {exact:.5f})")
 ```
 ```
 === 무한 우물 (L = 1 nm) ===
 n = 1:   0.37603 eV   (해석해 0.37603)
 n = 2:   1.50412 eV   (해석해 1.50412)
-n = 3:   3.38427 eV   (해석해 3.38427)
+n = 3:   3.38425 eV   (해석해 3.38427)
 
-=== 조화진동자 (H2) ===
+=== 조화 진동자 (H2) ===
 v = 0:   0.27208 eV   (해석해 0.27208)
-v = 1:   0.81624 eV   (해석해 0.81624)
-v = 2:   1.36047 eV   (해석해 1.36039)
+v = 1:   0.81623 eV   (해석해 0.81624)
+v = 2:   1.36046 eV   (해석해 1.36039)
 
 === 고리 (r = 1 A) ===
 0번째:  -0.00000 eV   (m=0, 해석해 0.00000)
@@ -135,7 +135,7 @@ v = 2:   1.36047 eV   (해석해 1.36039)
 매번 같은 그림을 그리니 이것도 함수로 만들어둡시다.
 
 ```python
-def plot_levels(ax, x, V, E, psi, n_levels=4, scale=0.2, xunit=1e9):
+def plot_levels(ax, x, V, E, psi, n_levels=4, scale=0.2, xunit=1e9, xlabel="x (nm)"):
     ax.plot(x * xunit, V / e, color="black", lw=3)
     span = (E[n_levels] - E[0]) / e
 
@@ -147,29 +147,30 @@ def plot_levels(ax, x, V, E, psi, n_levels=4, scale=0.2, xunit=1e9):
         ax.plot(x * xunit, E[k] / e + scale * span * f / np.abs(f).max(), lw=2)
 
     ax.set_ylim(min(0, V.min() / e) - 0.1 * span, E[n_levels] / e)
-    ax.set_xlabel("x (nm)")
+    ax.set_xlabel(xlabel)
     ax.set_ylabel("E (eV)")
 ```
 
 이제 네 가지 문제를 한 번에 그려봅시다.
 
 ```python
-N = 1500
+N = 1000
 cases = []
 
-# 무한 우물
+# (1) 무한 우물
 L = 2e-9
 x1 = np.linspace(0, L, N + 2)[1:-1]
-E1, p1 = solve_1d(np.zeros(N), x1, m_e)
-cases.append(("infinite well", x1, np.zeros(N), E1, p1))
+V1 = np.zeros(N)
+E1, p1 = solve_1d(V1, x1, m_e)
+cases.append(("infinite well", x1, V1, E1, p1))
 
-# 조화진동자
+# (2) 조화 진동자
 x2 = np.linspace(-6e-11, 6e-11, N + 2)[1:-1]
 V2 = 0.5 * 572.0 * x2**2
 E2, p2 = solve_1d(V2, x2, 0.504 * u)
 cases.append(("harmonic", x2, V2, E2, p2))
 
-# Morse 퍼텐셜
+# (3) Morse 퍼텐셜
 De, a = 37244 * 100 * h * c, 1.868e10
 mu_hcl = 1.008 * 34.969 / (1.008 + 34.969) * u
 x3 = np.linspace(-0.5e-10, 3e-10, N + 2)[1:-1]
@@ -177,20 +178,102 @@ V3 = De * (1 - np.exp(-a * x3)) ** 2
 E3, p3 = solve_1d(V3, x3, mu_hcl)
 cases.append(("Morse", x3, V3, E3, p3))
 
-# 이중 우물
-x4 = np.linspace(-1.5e-9, 1.5e-9, N + 2)[1:-1]
-V4 = np.where(np.abs(np.abs(x4) - 0.6e-9) < 0.3e-9, 0.0, 3.0 * e)
-E4, p4 = solve_1d(V4, x4, m_e)
-cases.append(("double well", x4, V4, E4, p4))
+# (4) 고리 위 입자
+R = 1e-10
+I = m_e * R**2
+x4 = np.linspace(0, 2 * np.pi, N, endpoint=False)
+V4 = np.zeros(N)
+E4, p4 = solve_1d(V4, x4, I, periodic=True)
 
 fig, axes = plt.subplots(2, 2, figsize=(12, 9))
 for ax, (title, x, V, E, psi) in zip(axes.ravel(), cases):
     plot_levels(ax, x, V, E, psi)
     ax.set_title(title, fontsize=14)
 
+plot_levels(axes[1, 1], x4, np.zeros(N), E4, p4, n_levels=5, xunit=1, xlabel="phi (rad)")
+axes[1, 1].set_title("ring", fontsize=14)
+axes[1, 1].set_xticks([0, np.pi, 2 * np.pi])
+axes[1, 1].set_xticklabels(["0", "pi", "2pi"])
+
 plt.tight_layout()
 plt.show()
 ```
 ![파동함수 그리기](/assets/image-69.png)
 
-퍼텐셜 배열 하나만 바꿔서 네 문제를 풀었습니다! Solver가 제대로 작동하고 있네요. 이제 여러분은 어떤 퍼텐셜이 들어와도 물리칠 수 있는 강력한 무기를 손에 넣었습니다. 수고하셨습니다! Part II에서 뵙겠습니다.
+퍼텐셜 배열 하나만 바꿔서 네 문제를 풀었습니다! Solver가 제대로 작동하고 있네요. 특히 오른쪽 아래의 고리 위 입자에 대한 그림을 보세요. $m=0$ 상태에 해당하는 파란색 직선을 제외하고는 각 에너지 준위 별로 파동함수가 두 개씩 그려져 있습니다. 위에서 에너지를 계산했을 때와 똑같이 $\pm m$의 두 상태가 축퇴되어 있는 것이죠. 두 곡선의 위상이 90도($\pi/4$)만큼 어긋나 있는데, `eigh` 함수가 $e^{\pm i \phi}$ 대신 $\cos \phi$와 $\sin \phi$를 반환하기 때문입니다.  
+
+
+## Part I을 끝내며
+
+자, 여러분은 어떤 퍼텐셜이 들어와도 물리칠 수 있는 강력한 무기를 손에 넣었습니다. 이제 이론적으로는 양자화학 문제를 모두 풀 수 있습니다! 물론 이론적으로만 말이죠... 지금까지는 퍼텐셜이 매우 간단한 모양들이었어서 코드가 답을 금방 내놓았지만 퍼텐셜이 1차원에서 2차원만 올라가도, 모양이 조금만 복잡해져도 계산에 필요한 시간은 기하급수적으로 증가합니다. '이론상으로는' 무한대의 시간이 주어져 있다면 항상 답을 얻을 수는 있겠지만 우리는 그럴 수 없죠. 그래서 많은 사람들이 계산을 효율적으로 더 빠르게 할 수 있는 여러 가지 근사법을 개발한 것입니다. 이 내용들은 나중에 Part III나 Part IV에서 보시게 될 겁니다.  
+
+Part II에서는 '진짜 원자'를 만나실 겁니다. 지금까지 우리가 만났던 몬스터들은 사실 하급이었던 것이죠. 우리가 얻은 무기들이 얼마나 강해졌는지, 또 앞으로 얼마나 강해질 수 있는지 알아보기 위해 중급 몬스터들이 있는 곳으로 가보겠습니다. 일단 주변 마을(카페)에 들러서 커피 한 잔과 함께 재정비를 하고 오죠! 다음 모험은 조금 더 험난해질테니까요.
+
+
+## (선택) 무기를 조금 더 강화해보기
+
+1. 코드에서 행렬을 희소행렬로 바꿔보세요. 지금은 NumPy 패키지를 써서 $N \times N$ 행렬을 통째로 만드는데, `scipy.sparse`를 쓰면 희소 행렬로 만들 수 있어 메모리를 절약할 수 있습니다. 따라서 격자점을 좀 더 늘릴 수 있고요.
+2. Solver 함수가 기댓값도 계산해주도록 만들어보세요. 위치, 운동량 등의 연산자의 기댓값을 구하는 방법은 5장에서 배웠습니다.
+3. 시간에 따른 파동함수의 변화를 애니메이션으로 시각화할 수 있도록 코드를 수정해보세요. 퍼텐셜이 시간에 대해 일정하다면 Schrödinger 방정식의 해는 3.3절에서 본 것처럼 시간 독립 형태로 나타납니다.
+<details>
+<summary>애니메이션화 코드 예시 보기</summary>
+<div markdown="1">
+```python
+import matplotlib
+from matplotlib.animation import FuncAnimation, PillowWriter
+
+
+def Animate(
+    x,
+    V,
+    E,
+    psi,
+    Psi0,
+    T=1e-14,
+    frames=240,
+    xunit=1e9,
+    xlabel="x (nm)",
+    filename="animation.gif",
+    title=""
+):
+    dx = x[1] - x[0]
+
+    Psi0 = Psi0 / np.sqrt(np.trapezoid(np.abs(Psi0) ** 2, x))
+    c = psi.T @ Psi0 * dx
+
+    times = np.linspace(0, T, frames)
+    prob = np.array(
+        [np.abs(psi @ (c * np.exp(-1j * E * t / hbar))) ** 2 for t in times]
+    )
+
+    Vplot = V / E
+    has_V = np.ptp(V) > 0
+    span = np.ptp(Vplot) if has_V else 1
+    base = Vplot.min()
+    scale = 0.8 * span / prob.max()
+
+    fig, ax = plt.subplots(figsize=(7, 4))
+    ax.plot(x * xunit, Vplot, color="black", lw=2)
+    (line,) = ax.plot([], [], color="crimson", lw=2)
+    patch = [None]
+
+    ax.set_xlim(x[0] * xunit, x[-1] * xunit)
+    ax.set_ylim(base - 0.05 * span, base + 1.05 * span)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel("V (eV) / |psi|^2")
+    ttl = ax.set_title("")
+
+    def update(i):
+        p = base + prob[i] * scale
+        line.set_data(x * xunit, p)
+        if patch[0]:
+            patch[0].remove()
+        patch[0] = ax.fill_between(x * xunit, base, p, color="crimson", alpha=0.25)
+        ttl.set_text(f"{title} t = {times[i]*1e15:.2f} fs")
+        return (line,)
+
+    ani = FuncAnimation(fig, update, frames=frames, blit=False)
+    ani.save(filename, writer=PillowWriter(fps=24))
+```
+</div>
+</details>
