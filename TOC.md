@@ -50,3 +50,8 @@
     * [7.3. 강체 회전자](pages/07-03-rigid-rotor.md)
     * [7.4. 프로젝트 1 — 1차원 Schrödinger 방정식 solver](pages/07-04-project-1d-schrodinger-solver.md)
 * [Part II. 원자의 구조](pages/part-2-atomic-structure.md)
+  * [8. 수소 원자](pages/08-hydrogen-atom.md)
+    * [8.1. ](pages/08-01.md)
+    * [8.2. ](pages/08-02.md)
+    * [8.3. ](pages/08-03.md)
+    * [8.4. ](pages/08-04.md)
