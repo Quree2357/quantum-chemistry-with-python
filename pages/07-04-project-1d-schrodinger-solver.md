@@ -214,10 +214,11 @@ Part II에서는 '진짜 원자'를 만나실 겁니다. 지금까지 우리가 
 
 1. 코드에서 행렬을 희소행렬로 바꿔보세요. 지금은 NumPy 패키지를 써서 $N \times N$ 행렬을 통째로 만드는데, `scipy.sparse`를 쓰면 희소 행렬로 만들 수 있어 메모리를 절약할 수 있습니다. 따라서 격자점을 좀 더 늘릴 수 있고요.
 2. Solver 함수가 기댓값도 계산해주도록 만들어보세요. 위치, 운동량 등의 연산자의 기댓값을 구하는 방법은 5장에서 배웠습니다.
-3. 시간에 따른 파동함수의 변화를 애니메이션으로 시각화할 수 있도록 코드를 수정해보세요. 퍼텐셜이 시간에 대해 일정하다면 Schrödinger 방정식의 해는 3.3절에서 본 것처럼 시간 독립 형태로 나타납니다.
+3. 시간에 따른 파동함수의 변화를 애니메이션으로 시각화할 수 있도록 코드를 수정해보세요. 퍼텐셜이 시간에 대해 일정하다면 Schrödinger 방정식의 해는 3.3절에서 본 것처럼 시간 독립 형태로 나타납니다. 상자 속 입자에서 $n=1$과 $n=2$를 반씩 섞은 파동함수는 시간에 따라 어떻게 움직이나요? 평형상태에서 벗어난 위치에서 시작하는 조화 진동자의 파동함수는요?
 <details>
 <summary>애니메이션화 코드 예시 보기</summary>
 <div markdown="1">
+    
 ```python
 import matplotlib
 from matplotlib.animation import FuncAnimation, PillowWriter
@@ -229,8 +230,8 @@ def Animate(
     E,
     psi,
     Psi0,
-    T=1e-14,
-    frames=240,
+    T=4e-14,
+    frames=360,
     xunit=1e9,
     xlabel="x (nm)",
     filename="animation.gif",
@@ -246,7 +247,7 @@ def Animate(
         [np.abs(psi @ (c * np.exp(-1j * E * t / hbar))) ** 2 for t in times]
     )
 
-    Vplot = V / E
+    Vplot = V / e
     has_V = np.ptp(V) > 0
     span = np.ptp(Vplot) if has_V else 1
     base = Vplot.min()
@@ -273,7 +274,36 @@ def Animate(
         return (line,)
 
     ani = FuncAnimation(fig, update, frames=frames, blit=False)
-    ani.save(filename, writer=PillowWriter(fps=24))
+    ani.save(filename, writer=PillowWriter(fps=30))
+
+
+# (1) 상자 속 입자에서 n=1과 n=2 상태가 섞인 상황
+L, N = 2e-9, 1000
+x = np.linspace(0, L, N + 2)[1:-1]
+V = np.zeros(N)
+E, psi = solve_1d(V, x, m_e)
+
+Psi0 = (psi[:, 0] + psi[:, 1]) / np.sqrt(2)
+
+period = 2 * np.pi * hbar / (E[1] - E[0])
+
+Animate(x, V, E, psi, Psi0, title="box")
+
+
+# (2) 조화 진동자에서 초기 파동함수가 평형상태에서 30 pm 어긋난 상황
+L, N = 1e-10, 1000
+k, mu = 572, 0.504 * u
+omega = np.sqrt(k / mu)
+
+xh = np.linspace(-L, L, N + 2)[1:-1]
+Vh = 0.5 * k * xh**2
+Eh, psih = solve_1d(Vh, xh, mu)
+
+alpha = mu * omega / hbar
+Psi0h = np.exp(-alpha * (xh - 3e-11) ** 2 / 2)
+
+Animate(xh, Vh, Eh, psih, Psi0h, title="harmonic oscillator")
 ```
+
 </div>
 </details>
