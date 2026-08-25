@@ -1,5 +1,7 @@
 # 8.1. 수소 원자의 Schrödinger 방정식
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/08-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 이전에도 몇 번 얘기했었지만 Schrödinger 방정식은 편미분방정식이라서 푸는 것이 매우 어렵습니다. 지금까지 우리가 봤던 모형들은 조건을 매우 단순화시켰기 때문에 그나마 손으로 풀 수 있었죠. 다행히 수소 원자의 경우도 그렇습니다. 바로 원자를 구성하는 입자가 원자핵과 전자, 이렇게 두 개뿐이기 때문인데요. 그래서 사실 수소 원자뿐만 아니라 전자가 한 개만 있는 **수소꼴 원자(hydrogenic atom)**들은 모두 같은 방식으로 풀 수 있습니다. 우선 가장 작은 시스템인 '수소 원자'를 보도록 합시다.
 
 
@@ -49,7 +51,7 @@ plt.show()
 
 print(f"r = a0 에서의 퍼텐셜 에너지 = {-(e**2) / (4 * np.pi * epsilon_0 * a0)/e:.4f} eV")
 ```
-![수소 원자의 퍼텐셜](/assets/image-70.png)
+![수소 원자의 퍼텐셜](/assets/image-72.png)
 
 물론 우리는 어떻게 생겼는지 이미 잘 알고 있지만 몇 가지 포인트를 짚고 넘어갑시다. 앞에서 다뤘던 상자 속 입자나 조화 진동자에서의 퍼텐셜과는 전혀 다른 모양이죠. 원점에서는 음의 무한대로 발산합니다. 수치 계산에서는 무한대를 다룰 수 없으니 문제가 되지만 다행히 우리는 신경을 쓰지 않아도 나중에 알아서 상쇄가 됩니다. 그리고 거리가 무한대로 가면 0으로 수렴합니다. 속박 상태가 유한 개 생기고, 에너지가 일정 이상이 되면 전자가 떨어져 나가서 수소 이온이 됩니다.
 
