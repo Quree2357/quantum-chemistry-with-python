@@ -23,7 +23,7 @@
     * [2.2. Bohr의 가정 해결](pages/02-02-bohr-model-solution.md)
     * [2.3. 전자의 이중 슬릿 실험](pages/02-03-double-slit-experiment.md)
     * [2.4. Heisenberg의 불확정성 원리](pages/02-04-the-uncertainty-principle.md)
-  * [3. 파동방정식에서 Schrödinger 방정식으로](pages/03-the-wave-equations.md)
+  * [3. 파동 방정식에서 Schrödinger 방정식으로](pages/03-the-wave-equations.md)
     * [3.1. 진동하는 줄 — 변수분리법](pages/03-01-classical-wave-equation.md)
     * [3.2. 진동하는 막 — 2차원 문제](pages/03-02-vibrating-membrane.md)
     * [3.3. Schrödinger 방정식](pages/03-03-the-schrodinger-equation.md)

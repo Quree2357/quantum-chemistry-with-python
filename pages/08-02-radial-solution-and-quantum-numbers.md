@@ -1,5 +1,7 @@
 # 8.2. 지름 방정식과 양자수
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/08-02.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 앞 절에서 수소 원자의 Schrödinger 방정식을 살펴보았습니다. 그리고 변수분리를 통해서 지름 성분과 각도 성분의 방정식을 따로 얻었죠. 각도 성분의 파동 방정식의 해는 7장에서 봤던 구면 조화 함수로 나타났습니다. 이제 지름 성분의 파동 방정식을 풀 차례입니다. 복잡하게 생겼지만 천천히 하나씩 해결해나가면 풀 수 있습니다.
 
 
