@@ -32,9 +32,9 @@ from scipy.constants import hbar, m_e, e, u, h, c
 
 def solve_1d(V, x, mass, periodic=False):
     """
-    V        : 각 격자점에서의 퍼텐셜
-    x        : 격자점
-    mass     : 질량, 또는 회전 문제에서는 관성모멘트
+    V        : 각 격자점에서의 퍼텐셜 (J)
+    x        : 격자점 (m)
+    mass     : 질량 (kg), 또는 회전 문제에서는 관성모멘트 (kg m^2)
     periodic : True면 주기적 경계조건 (고리 문제)
 
     반환값   : 에너지 (J), 파동함수 (열 방향으로 psi[:, n])
