@@ -88,10 +88,10 @@ $$
 \hat{L}^2 Y_l^m = l(l+1)\hbar^2 Y_l^m
 $$
 
-그러면 우리는 $R$만 구하면 되겠네요! 변수분리를 통해 얻은 거리 $r$만에 의존하는 식을 **지름 방정식(radial equation)**이라고 하고, 이 식의 해인 $R(r)$은 **지름 파동함수(radial wave function)**라고 합니다.
+그러면 우리는 $R$만 구하면 되겠네요! 변수분리를 통해 얻은 거리 $r$만에 의존하는 식을 **지름 방정식(radial equation)**이라고 하고, 이 식의 해인 $R(r)$은 **지름 파동함수(radial wave function)**라고 합니다. 변수가 하나뿐이니 편미분 대신 상미분으로 써도 됩니다.
 
 $$
--\frac{\hbar^2}{2m_e r^2}\frac{\partial}{\partial r} \left( r^2 \frac{\partial}{\partial r} \right) R(r) + \left[ \frac{l(l+1)\hbar^2}{2m_e r^2} - \frac{e^2}{4\pi \varepsilon_0 r} \right] R(r) = ER(r)
+-\frac{\hbar^2}{2m_e r^2}\frac{d}{dr} \left( r^2 \frac{d}{dr} \right) R(r) + \left[ \frac{l(l+1)\hbar^2}{2m_e r^2} - \frac{e^2}{4\pi \varepsilon_0 r} \right] R(r) = ER(r)
 $$
 
 [[TIP]]
