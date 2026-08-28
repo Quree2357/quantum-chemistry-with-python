@@ -1,5 +1,7 @@
 # 8.3. 오비탈과 에너지
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/08-03.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 앞에서 수소 원자의 Schrödinger 방정식의 각도 성분과 지름 성분 각각에 대한 방정식과 그 해를 살펴보았죠. 이제 둘을 합체할 차례입니다. 수소 원자의 완전한 파동 함수, 그리고 전자를 발견할 확률 분포는 어떻게 생겼는지 직접 그려서 확인해보도록 합시다.
 
 
