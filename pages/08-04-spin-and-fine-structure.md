@@ -77,7 +77,7 @@ n = 3, l = 1 (3p): 약 1.3e-05 eV
 기존의 Schrödinger 방정식에서는 스핀-궤도 결합을 고려하지 않았기 때문에 이제 이것을 고려해주어야 더욱 정확한 방정식이 됩니다. 구체적으로는 다음처럼 스핀-궤도 결합에 해당하는 항이 하나 추가된 형태의 Hamiltonian을 사용하게 됩니다.
 
 $$
-\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 - \frac{e^2}{4\pi \varepsilon_0 r} + \xi(r) \hat{\mathbf{L}} \hat{\mathbf{S}}
+\hat{H} = -\frac{\hbar^2}{2m}\nabla^2 - \frac{e^2}{4\pi \varepsilon_0 r} + \xi(r) \hat{\mathbf{L}} \cdot \hat{\mathbf{S}}
 $$
 
 원래 수소 원자에서는 Schrödinger 방정식을 정확하게 풀 수 있었지만 이제는 스핀-궤도 결합 항으로 인해 풀 수 없습니다. 이런 경우에 쓰는 방법을 섭동(pertubation)이라고 하는데, 자세한 내용은 11장에서 살펴보겠습니다.
