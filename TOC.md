@@ -57,6 +57,6 @@
     * [8.4. 스핀과 미세구조](pages/08-04-spin-and-fine-structure.md)
   * [9. 헬륨 원자와 배타원리](pages/09-helium-atom-and-exclusion-principle.md)
     * [9.1. 헬륨 원자](pages/09-01-helium-atom.md)
-    * [9.2. 배타원리](pages/08-02-exclusion-principle.md)
+    * [9.2. Pauli의 배타원리](pages/08-02-pauli-exclusion-principle.md)
     * [9.3. Slater 행렬식](pages/09-03-slater-determinant.md)
     * [9.4. 아직 남은 문제](pages/09-04-remaining-problem.md)
