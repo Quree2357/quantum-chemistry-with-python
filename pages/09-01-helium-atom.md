@@ -27,32 +27,7 @@ $$
 ## 헬륨 원자의 Schrödinger 방정식
 
 헬륨 원자에는 전자가 두 개 있기 때문에 각 전자의 위치를 따로 생각해주어야 합니다.  
-(코드 나중에 지워야 함)
-```python
-import matplotlib.pyplot as plt
 
-fig, ax = plt.subplots(figsize=(6, 5))
-ax.plot(0, 0, "o", ms=20, color="crimson")
-ax.text(0, -0.25, "nucleus (+2e)", fontsize=10, ha="center")
-
-e1, e2 = (-1, 0.5), (1, 1)
-for pos, name in [(e1, "1"), (e2, "2")]:
-    ax.plot(*pos, "o", ms=10, color="steelblue")
-    ax.text(pos[0], pos[1] + 0.15, f"electron {name}", fontsize=10, ha="center")
-
-ax.annotate("", xy=e1, xytext=(0, 0), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
-ax.annotate("", xy=e2, xytext=(0, 0), arrowprops=dict(arrowstyle="->", lw=2, color="black"))
-ax.annotate("", xy=e2, xytext=e1, arrowprops=dict(arrowstyle="<->", lw=2, color="darkorange"))
-ax.text(-0.7, 0.1, "r1", fontsize=14)
-ax.text(0.5, 0.35, "r2", fontsize=14)
-ax.text(-0.2, 0.85, "r12", fontsize=14, color="darkorange")
-
-ax.set_xlim(-1.5, 1.5)
-ax.set_ylim(-0.5, 1.5)
-ax.set_aspect("equal")
-ax.axis("off")
-plt.show()
-```
 ![헬륨 원자의 전자 좌표](/assets/image-80.png)
 
 수소 원자에서와 마찬가지로 원자핵을 원점에 놓고 각 전자의 위치를 표시했습니다. 1번 전자까지의 거리를 $r_1$, 2번 전자까지의 거리를 $r_2$로 놓고, 두 전자 사이의 거리를 $r_{12}$로 놓았습니다.  
