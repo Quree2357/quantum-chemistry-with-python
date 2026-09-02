@@ -1,5 +1,7 @@
 # 9.1. 헬륨 원자
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/09-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 헬륨 원자는 2개의 양성자와 2개의 중성자로 이루어진 원자핵과 2개의 전자로 이루어진 원자입니다. 수소 원자와 비교해서 원자핵의 질량은 약 4배, 전하는 2배 늘어났고 전자가 한 개 늘어났죠. 크게 달라 보이는 점은 없지만 이 차이만으로도 난이도가 급상승합니다. 도대체 무엇이 문제일까요?
 
 
