@@ -59,4 +59,3 @@
     * [9.1. 헬륨 원자](pages/09-01-helium-atom.md)
     * [9.2. Pauli의 배타 원리](pages/09-02-pauli-exclusion-principle.md)
     * [9.3. Slater 행렬식](pages/09-03-slater-determinant.md)
-    * [9.4. 아직 남은 문제](pages/09-04-remaining-problem.md)
