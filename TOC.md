@@ -59,3 +59,7 @@
     * [9.1. 헬륨 원자](pages/09-01-helium-atom.md)
     * [9.2. Pauli의 배타 원리](pages/09-02-pauli-exclusion-principle.md)
     * [9.3. Slater 행렬식](pages/09-03-slater-determinant.md)
+  * [10. 다전자 원자](pages/10-many-electron-atoms.md)
+    * [10.1. 가리움과 유효 핵전하](pages/10-01-shielding-and-effective-nuclear-charge.md)
+    * [10.2. 침투와 오비탈 에너지](pages/10-02-penetration-and-orbital-energies.md)
+    * [10.3. 전자 배치와 주기적 경향성](pages/10-03-electron-configuration-and-periodicity.md)
