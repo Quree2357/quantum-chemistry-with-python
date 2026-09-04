@@ -9,9 +9,9 @@
 
 $$
 \begin{array}{lll}
-\text{(a)} & \uparrow\downarrow \quad \_\_ \quad \_\_ \\
-\text{(b)} & \uparrow\enspace \quad \uparrow\enspace \quad \_\_ \\
-\text{(c)} & \uparrow\enspace \quad \downarrow\enspace \quad \_\_
+\text{(a)} & \uparrow\downarrow & \square & \square \\
+\text{(b)} & \uparrow\enspace & \uparrow\enspace & \square \\
+\text{(c)} & \uparrow\enspace & \downarrow\enspace & \square
 \end{array}
 $$
 
