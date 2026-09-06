@@ -170,7 +170,7 @@ for n, l, name in [(4, 0, "4s"), (3, 2, "3d")]:
     r_mean = np.trapezoid(P(n, l, r) * r, r) / a0
     print(f"{name}: <r> = {r_mean:.2f} a0, r < a0일 확률: {inner * 100:.4f} %")
 ```
-![](/assets/image-84.png)
+![4s와 3d 오비탈](/assets/image-84.png)
 ```
 4s: <r> = 24.00 a0, r < a0일 확률: 0.3853 %
 3d: <r> = 10.50 a0, r < a0일 확률: 0.0005 %
