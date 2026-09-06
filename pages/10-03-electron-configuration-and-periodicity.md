@@ -1,5 +1,7 @@
 # 10.3. 전자 배치와 주기적 경향성
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/10-03.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 일반화학 시간에 주기율표를 만드는 원리는 총 세 가지가 있다고 배우셨을 겁니다. 하나는 앞에서 얘기했던 Pauli의 배타 원리이고, 나머지 두 가지는 **쌓음 원리(Aufbau principle)**와 **Hund의 규칙**이었죠. 쌓음 원리는 전자가 채워질 때 낮은 에너지부터 채워진다는 직관적으로도 알 수 있는 규칙이었습니다. Hund의 규칙은 축퇴된 오비탈에 전자가 들어갈 때는 한 오비탈에 전자가 반대 스핀으로 두 개 들어가는 것보다 같은 스핀으로 다른 오비탈에 들어가는 게 더 안정하다는 규칙이었습니다. Pauli의 배타 원리에 따르면 두 경우에 큰 차이가 없을 것 같은데 왜 그럴까요? 그리고 왜 하필 같은 스핀으로 들어가야 할까요?
 
 

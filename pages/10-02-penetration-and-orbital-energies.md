@@ -1,5 +1,7 @@
 # 10.2. 침투와 오비탈 에너지
 
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/10-02.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
 앞 절에서 원자의 에너지를 어림하기 위한 Slater 규칙에 대해 살펴보았습니다. 전자가 여러 개 있으면 핵을 가려서 유효 핵 전하가 감소할 것이라는 점에서 출발한 규칙이죠. 그런데 아직 설명하지 못하는 것이 있습니다. Slater 규칙에 따르면 $2s$ 오비탈과 $2p$ 오비탈은 같은 유효 핵 전하를 가져야 하는데 실제로는 $2s$ 오비탈이 더 안정하죠. 그 이유는 앞에서 슬쩍 힌트를 드렸는데요, 바깥쪽의 전자가 가끔 안쪽으로 파고든다고 했었던 것입니다. 그리고 그 정도가 오비탈마다 다르죠. 이번 절에서는 이것에 대해 살펴보겠습니다.
 
 
