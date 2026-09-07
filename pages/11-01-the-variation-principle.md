@@ -61,7 +61,7 @@ $$
 상자 안에서는 $V=0$이니 Hamiltonian은 $T$ 하나만으로 구성되죠.
 
 $$
-\braket{\hat{H}} = \braket{\hat{T}} = -\frac{\hbar^2}{2m} \int{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx = \frac{\hbar^2}{2m} \int{\left|\frac{d}{dx} \phi\right|^2} \, dx 
+\braket{\hat{H}} = \braket{\hat{T}} = -\frac{\hbar^2}{2m} \int_0^L{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx = \frac{\hbar^2}{2m} \int_0^L{\left|\frac{d}{dx} \phi\right|^2} \, dx 
 $$
 
 부분적분 공식을 쓰면 2차 미분이 1차 미분으로 바뀝니다. 수치적으로도 이 형태가 안정적이니 이렇게 계산해보겠습니다.
@@ -133,8 +133,8 @@ print(f"4차 근사 : {E:.6f} eV (오차: {(E - E_exact) / E_exact * 100:+8.4f} 
 
 $$
 \begin{align*}
-\braket{\hat{H}} &= -\frac{\hbar^2}{2m} \int{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2\int{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2} \\
-&= -\frac{\hbar^2}{2m} \int{(4c^2x^2-2c)e^{-cx^2}} \, dx + \frac{1}{2}m\omega^2\int{x^2 e^{-2cx^2}} \, dx \\
+\braket{\hat{H}} &= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2} \\
+&= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{(4c^2x^2-2c)e^{-cx^2}} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{x^2 e^{-2cx^2}} \, dx \\
 &= \left( \frac{\hbar^2 c}{2m} + \frac{m \omega^2}{8c} \right) \sqrt{\frac{\pi}{2c}}
 \end{align*}
 $$
