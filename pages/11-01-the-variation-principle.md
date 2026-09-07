@@ -11,11 +11,11 @@
 
 ## 정답을 모르면 상한이라도 알자
 
-9장에서 본 것처럼 헬륨 원자부터는 Schrödinger 방정식을 정확하게 풀 수 있는 방법이 없습니다. 생각해볼 수 있는 방법 중 하나는 여러 모양의 파동 함수를 추측해서 방정식에 던져보고 해가 되는지 확인하는 것인데, 문제는 그게 정말 정답인지 알 수가 없다는 것입니다. 정답이 없으니 비교해 볼 수도 없고 정답이 있었다면 애초에 추측할 필요가 없으니까요. 이럴 때 변분 원리가 이 악의 순환을 끊어주는 역할을 해줍니다.  
-그냥 '변분법'에 대해서 검색해보면 미적분학과 고전역학에서 사용하는 내용들이 나올텐데 지금 우리가 사용할 변분 원리는 양자역학에서 사용할 형태입니다. 임의의 계(system)의 바닥 상태를 생각해봅시다. 바닥 상태에서의 파동 함수가 $\psi_0$이고 그 때의 에너지가 $E_0$라고 해보죠. 그러면 변분 원리는 우리에게 아무거나 함수를 하나 골라서 에너지를 계산해보면 항상 $E_0$보다 크거나 같은 값을 준다는 것을 알려줍니다. 그러니까 추측을 여러 개 던져봤을 때 그 중에서 제일 낮은 에너지를 가지는 것이 정답에 가깝다는 뜻입니다. 정답에 얼마나 가까운지는 알 수 없어도 적어도 어떤 경우가 제일 정확도가 높은지는 알 수 있는 거죠. 식으로 쓰면 이렇게 됩니다.
+9장에서 본 것처럼 헬륨 원자부터는 Schrödinger 방정식을 정확하게 풀 수 있는 방법이 없습니다. 생각해볼 수 있는 방법 중 하나는 여러 모양의 파동 함수를 추측해서 방정식에 던져보고 해가 되는지 확인하는 것인데, 문제는 그게 정말 정답인지 알 수가 없다는 것입니다. 정답이 없으니 비교해 볼 수도 없고 정답이 있었다면 애초에 추측할 필요가 없으니까요. 이럴 때 변분 원리가 이 악의 무리의 순환 공격을 끊어주는 역할을 해줍니다.  
+그냥 '변분법'에 대해서 검색해보면 미적분학과 고전역학에서 사용하는 내용들이 나올 텐데 지금 우리가 사용할 변분 원리는 양자역학에서 사용할 형태입니다. 임의의 계(system)의 바닥 상태를 생각해봅시다. 바닥 상태에서의 파동 함수가 $\psi_0$이고 그때의 에너지가 $E_0$라고 해보죠. 그러면 변분 원리는 우리에게 아무거나 함수를 하나 골라서 에너지를 계산해보면 항상 $E_0$보다 크거나 같은 값을 준다는 것을 알려줍니다. 그러니까 추측을 여러 개 던져봤을 때 그 중에서 제일 낮은 에너지를 가지는 것이 정답에 가깝다는 뜻입니다. 정답에 얼마나 가까운지는 알 수 없어도 적어도 어떤 경우가 제일 정확도가 높은지는 알 수 있는 거죠. 식으로 쓰면 이렇게 됩니다.
 
 $$
-E_{\phi} = \frac{\Braket{ \phi | \hat{H} | \phi }}{\braket{ \phi | \phi }} \geq E_0
+E_{\phi} = \frac{\left\langle \phi | \hat{H} | \phi \right\rangle}{\langle \phi | \phi \rangle} \geq E_0
 $$
 
 여기서 우리가 아무렇게나 잡은 함수 $\phi$를 시험 함수(trial function)라고 부릅니다. 증명 과정은 아주 간단합니다. 5.3절에서 절반 정도는 해놨는데요, 시험 함수 $\phi$를 고유 함수들의 선형 결합으로 나타낸 것에서 시작합니다.
@@ -27,7 +27,7 @@ $$
 이 때, $\psi_n$은 Hamiltonian의 정확한 고유 함수들입니다. 즉, $\hat{H}\psi_n = E_n \psi_n$을 만족하는 함수들이죠. 이것을 위의 에너지 기댓값 식에 대입하면 다음과 같습니다. (시험 함수 $\phi$가 규격화되어 있다고 가정합시다.)
 
 $$
-E_{\phi} = \Braket{\phi|\hat{H}|\phi} = \int{\phi^* \hat{H} \phi} d\tau = \int{ \sum_n c_n^* \psi_n^* \hat{H} \sum_n c_n \psi_n } d\tau = \int{ \sum_n c_n^* \psi_n^* \sum_n c_n \hat{H} \psi_n } d\tau
+E_{\phi} = \left\langle \phi|\hat{H}|\phi \right\rangle = \int{\phi^* \hat{H} \phi} d\tau = \int{ \sum_n c_n^* \psi_n^* \hat{H} \sum_n c_n \psi_n } d\tau = \int{ \sum_n c_n^* \psi_n^* \sum_n c_n \hat{H} \psi_n } d\tau
 $$
 
 여기서 $\psi_n$은 정확한 고유 함수들이니 고유값 방정식을 만족했었죠. 그러면 이렇게 됩니다.
@@ -42,7 +42,7 @@ $$
 E_{\phi} = \sum_n c_n^* c_n E_n = \sum_n |c_n|^2 E_n
 $$
 
-이제 5.3절에서 봤던 값이 나왔습니다. 바닥 상태의 에너지가 $E_n$ 중에서 제일 낮은 값일테니 $E_{\phi}$는 항상 $E_0$보다 크거나 같습니다. 변분 원리가 증명되었습니다!
+이제 5.3절에서 봤던 값이 나왔습니다. 바닥 상태의 에너지가 $E_n$ 중에서 제일 낮은 값일 테니 $E_{\phi}$는 항상 $E_0$보다 크거나 같습니다. 변분 원리가 증명되었습니다!
 
 [[TIP]]
 등호는 당연히 시험 함수가 정확한 바닥 상태의 파동 함수일 때 성립합니다. 그러니 에너지를 낮추려는 방향으로 계산하면 자연스럽게 바닥 상태에 가까워지는 거죠. 다만 주의할 점이 있습니다. 에너지가 잘 맞는다고 파동 함수도 잘 맞는 것은 아닙니다. 에너지가 소수점 아래 몇 자리까지 맞아도 쌍극자 모멘트 같은 다른 성질은 몇 퍼센트씩 틀리는 일이 생깁니다. 이 이야기는 책의 후반부에서 다시 하겠습니다.
@@ -61,7 +61,7 @@ $$
 상자 안에서는 $V=0$이니 Hamiltonian은 $T$ 하나만으로 구성되죠.
 
 $$
-\braket{\hat{H}} = \braket{\hat{T}} = -\frac{\hbar^2}{2m} \int_0^L{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx = \frac{\hbar^2}{2m} \int_0^L{\left|\frac{d}{dx} \phi\right|^2} \, dx 
+\left\langle \hat{H} \right\rangle = \left\langle \hat{T} \right\rangle = -\frac{\hbar^2}{2m} \int_0^L{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx = \frac{\hbar^2}{2m} \int_0^L{\left|\frac{d}{dx} \phi\right|^2} \, dx 
 $$
 
 부분적분 공식을 쓰면 2차 미분이 1차 미분으로 바뀝니다. 수치적으로도 이 형태가 안정적이니 이렇게 계산해보겠습니다.
@@ -133,13 +133,13 @@ print(f"4차 근사 : {E:.6f} eV (오차: {(E - E_exact) / E_exact * 100:+8.4f} 
 
 $$
 \begin{align*}
-\braket{\hat{H}} &= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2} \\
-&= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{(4c^2x^2-2c)e^{-cx^2}} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{x^2 e^{-2cx^2}} \, dx \\
+\left\langle \hat{H} \right\rangle &= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2} \\
+&= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{(4c^2x^2-2c)e^{-2cx^2}} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{x^2 e^{-2cx^2}} \, dx \\
 &= \left( \frac{\hbar^2 c}{2m} + \frac{m \omega^2}{8c} \right) \sqrt{\frac{\pi}{2c}}
 \end{align*}
 $$
 
-이 시험 함수는 규격화되지 않은 상태이기 때문에 $\braket{\phi|\phi}=\sqrt{\frac{\pi}{2c}}$로 나누어주어야 합니다. 그러면 에너지는 이렇게 되겠군요.
+이 시험 함수는 규격화되지 않은 상태이기 때문에 $\langle \phi | \phi \rangle=\sqrt{\frac{\pi}{2c}}$로 나누어주어야 합니다. 그러면 에너지는 이렇게 되겠군요.
 
 $$
 E_{\phi} = \frac{\hbar^2 c}{2m} + \frac{m \omega^2}{8c}
