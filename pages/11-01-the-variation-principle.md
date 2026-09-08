@@ -15,7 +15,7 @@
 그냥 '변분법'에 대해서 검색해보면 미적분학과 고전역학에서 사용하는 내용들이 나올 텐데 지금 우리가 사용할 변분 원리는 양자역학에서 사용할 형태입니다. 임의의 계(system)의 바닥 상태를 생각해봅시다. 바닥 상태에서의 파동 함수가 $\psi_0$이고 그때의 에너지가 $E_0$라고 해보죠. 그러면 변분 원리는 우리에게 아무거나 함수를 하나 골라서 에너지를 계산해보면 항상 $E_0$보다 크거나 같은 값을 준다는 것을 알려줍니다. 그러니까 추측을 여러 개 던져봤을 때 그 중에서 제일 낮은 에너지를 가지는 것이 정답에 가깝다는 뜻입니다. 정답에 얼마나 가까운지는 알 수 없어도 적어도 어떤 경우가 제일 정확도가 높은지는 알 수 있는 거죠. 식으로 쓰면 이렇게 됩니다.
 
 $$
-E_{\phi} = \frac{\left\langle \phi | \hat{H} | \phi \right\rangle}{\langle \phi | \phi \rangle} \geq E_0
+E_{\phi} = \frac{\left\langle \phi \middle| \hat{H} \middle| \phi \right\rangle}{\langle \phi \middle| \phi \rangle} \geq E_0
 $$
 
 여기서 우리가 아무렇게나 잡은 함수 $\phi$를 **시험 함수(trial function)**라고 부릅니다. 증명 과정은 아주 간단합니다. 5.3절에서 절반 정도는 해놨는데요, 시험 함수 $\phi$를 고유 함수들의 선형 결합으로 나타낸 것에서 시작합니다.
@@ -27,7 +27,7 @@ $$
 이 때, $\psi_n$은 Hamiltonian의 정확한 고유 함수들입니다. 즉, $\hat{H}\psi_n = E_n \psi_n$을 만족하는 함수들이죠. 이것을 위의 에너지 기댓값 식에 대입하면 다음과 같습니다. (시험 함수 $\phi$가 규격화되어 있다고 가정합시다.)
 
 $$
-E_{\phi} = \left\langle \phi|\hat{H}|\phi \right\rangle = \int{\phi^* \hat{H} \phi} d\tau = \int{ \sum_n c_n^* \psi_n^* \hat{H} \sum_n c_n \psi_n } d\tau = \int{ \sum_n c_n^* \psi_n^* \sum_n c_n \hat{H} \psi_n } d\tau
+E_{\phi} = \left\langle \phi \middle| \hat{H} \middle| \phi \right\rangle = \int{\phi^* \hat{H} \phi} d\tau = \int{ \sum_n c_n^* \psi_n^* \hat{H} \sum_n c_n \psi_n } d\tau = \int{ \sum_n c_n^* \psi_n^* \sum_n c_n \hat{H} \psi_n } d\tau
 $$
 
 여기서 $\psi_n$은 정확한 고유 함수들이니 고유값 방정식을 만족했었죠. 그러면 이렇게 됩니다.
