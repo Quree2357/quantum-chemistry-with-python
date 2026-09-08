@@ -22,10 +22,10 @@ $$
 비섭동 Hamiltonian에 대한 해는 이미 알고 있습니다. 9장에서 오비탈 근사를 했을 때와 똑같은 결과입니다.
 
 $$
-\psi^{(0)} = \sqrt{\frac{8}{\pi}}e^{-2r_1} \cdot \sqrt{\frac{8}{\pi}}e^{-2r_2} \qquad E_n^{(0)} = -4 \left( \frac{1}{2n_1^2} + \frac{1}{2n_2^2} \right)
+\psi^{(0)} = \sqrt{\frac{8}{\pi}}e^{-2r_1} \cdot \sqrt{\frac{8}{\pi}}e^{-2r_2} \qquad E^{(0)} = -4 \left( \frac{1}{2n_1^2} + \frac{1}{2n_2^2} \right)
 $$
 
-두 전자가 모두 $1s$ 오비탈에 있다고 하면 $n=1$이니까 $E_n^{(0)} = -4$ Hartree가 되죠. 9.1절에서 계산했던 -108.85 eV와 같은 값입니다. 이제 섭동에 대한 보정 항을 계산하면 되겠네요.
+두 전자가 모두 $1s$ 오비탈에 있다고 하면 $n=1$이니까 $E^{(0)} = -4$ Hartree가 되죠. 9.1절에서 계산했던 -108.85 eV와 같은 값입니다. 이제 섭동에 대한 보정 항을 계산하면 되겠네요.
 
 에너지의 1차 보정 항은 다음과 같습니다.
 
@@ -80,7 +80,7 @@ $$
 이걸 가운데 넣고 적분해야 한다니 생각보다 끔찍한데요... 이렇게 써보면 어떨까요?
 
 $$
-\hat{H} = \left( -\frac{1}{2} \nabla_1^2 - \frac{Z}{r_1} \right) + \left( -\frac{1}{2} \nabla_2^2 - \frac{Z}{r_2} \right) + \frac{Z-2}{r_1} + \frac{Z-2}{r_1} + \frac{1}{r_{12}}
+\hat{H} = \left( -\frac{1}{2} \nabla_1^2 - \frac{Z}{r_1} \right) + \left( -\frac{1}{2} \nabla_2^2 - \frac{Z}{r_2} \right) + \frac{Z-2}{r_1} + \frac{Z-2}{r_2} + \frac{1}{r_{12}}
 $$
 
 항이 조금 더 많아지긴 했는데 앞의 두 항이 각각 핵 전하가 $Z$인 수소꼴 원자의 Hamiltonian이 됐죠. 그리고 우리가 정한 시험 함수는 딱 이 경우에 맞는 파동 함수 모양입니다. 그러니 Hamiltonian을 취하면 고유값이 나오겠죠.
@@ -95,7 +95,8 @@ $$
 \int \psi_t^* \hat{H} \psi_t \, d\tau = -Z^2 \int \psi_t^* \psi_t \, d\tau + (Z-2)\left[\int \frac{\psi_t^* \psi_t}{r_1} \, d\tau + \int \frac{\psi_t^* \psi_t}{r_2} \, d\tau \right]+ \int \frac{\psi_t^* \psi_t}{r_{12}} \, d\tau
 $$
 
-이제 각 항의 적분을 해봅시다. 맨 처음 적분은 분모와 같은 모양인데 아까 1이라고 했었죠.
+이제 각 항의 적분을 해봅시다. 맨 처음 적분은 분모와 같은 모양인데 아까 1이라고 했었죠. 그 다음 적분부터만 계산하면 됩니다.
+
 ```python
 integral3 = sp.integrate(phi_1 * phi_1 / r1 * 4 * sp.pi * r1**2, (r1, 0, sp.oo))
 integral4 = sp.integrate(phi_2 * phi_2 / r2 * 4 * sp.pi * r2**2, (r2, 0, sp.oo))
@@ -106,7 +107,7 @@ print("두 번째 적분값: ", integral4 * integral1)
 첫 번째 적분값:  Z
 두 번째 적분값:  Z
 ```
-마지막 항이 조금 문제입니다. $r_{12}$가 $r_1$과 $r_2$에 모두 의존하니 SymPy로 한번에 쓰기가 어렵거든요. 그래서 경우를 둘로 나눠서 계산합니다.
+마지막 항이 조금 문제입니다. $r_{12}$가 $r_1$과 $r_2$에 모두 의존하니 SymPy로 한 번에 쓰기가 어렵거든요. 그래서 경우를 둘로 나눠서 계산합니다.
 
 ```python
 f = (4 * sp.pi) ** 2 * phi_1**2 * phi_2**2 * r1**2 * r2**2
