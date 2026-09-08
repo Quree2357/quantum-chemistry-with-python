@@ -22,7 +22,7 @@ $$
 $S_{ij}=\int{f_i^* f_j} \, d\tau$는 **중첩 행렬(overlap matrix) 요소**라고 하는 값인데, 어디서 많이 본 것처럼 생겼지만 시험 함수들이 직교한다는 보장이 없기 때문에 Kronecker delta와 같지는 않습니다. 이번에는 분자 부분을 살펴봅시다.
 
 $$
-\langle \phi | \hat{H} | \phi \rangle = \int{\phi^* \hat{H} \phi} \, d\tau = \int{\left( \sum_{i=1}^n c_i^* f_i^* \right) \hat{H} \left( \sum_{j=1}^n c_j f_j \right)} \, d\tau = \sum_{i=1}^n \sum_{j=1}^n c_i^* c_j \int{f_i^* \hat{H} f_j} \, d\tau = \sum_{i=1}^n \sum_{j=1}^n c_i^* c_j H_{ij}
+\left\langle \phi \middle| \hat{H} \middle| \phi \right\rangle = \int{\phi^* \hat{H} \phi} \, d\tau = \int{\left( \sum_{i=1}^n c_i^* f_i^* \right) \hat{H} \left( \sum_{j=1}^n c_j f_j \right)} \, d\tau = \sum_{i=1}^n \sum_{j=1}^n c_i^* c_j \int{f_i^* \hat{H} f_j} \, d\tau = \sum_{i=1}^n \sum_{j=1}^n c_i^* c_j H_{ij}
 $$
 
 Hamiltonian이 붙은 것 빼고는 아까와 비슷한 형태입니다. 이번에도 뒤에 붙은 적분을 $H_{ij}$라고 썼는데 Hamiltonian 행렬 요소라고 부릅니다. 이제 에너지는 다음과 같이 계산할 수 있습니다.
