@@ -61,41 +61,52 @@ $$
 상자 안에서는 $V=0$이니 Hamiltonian은 $T$ 하나만으로 구성되죠.
 
 $$
-\left\langle \hat{H} \right\rangle = \left\langle \hat{T} \right\rangle = -\frac{\hbar^2}{2m} \int_0^L{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx = \frac{\hbar^2}{2m} \int_0^L{\left|\frac{d}{dx} \phi\right|^2} \, dx 
+\left\langle \phi \middle| \hat{H} \middle| \phi \right\rangle = \left\langle \phi \middle| \hat{T} \middle| \phi \right\rangle = -\frac{\hbar^2}{2m} \int_0^L{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx
 $$
 
-부분적분 공식을 쓰면 2차 미분이 1차 미분으로 바뀝니다. 수치적으로도 이 형태가 안정적이니 이렇게 계산해보겠습니다.
+우리가 정한 함수는 규격화되어 있지 않으니 분모도 계산해주어야 합니다. SymPy로 직접 계산해봅시다.
 ```python
-import numpy as np
+import sympy as sp
 from scipy.constants import hbar, m_e, e, h
 
 L = 1e-9
-x = np.linspace(0, L, 100001)
 E_exact = h**2 / (8 * m_e * L**2) / e
-
-
-def energy(f):
-    df = np.gradient(f, x)
-    T = hbar**2 / (2 * m_e) * np.trapezoid(df**2, x)
-    N = np.trapezoid(f**2, x)
-    return T / N
-
-
 print(f"참값 : {E_exact:.6f} eV")
 
-for f, name in [(x * (L - x), "x(L-x)"), (x**2 * (L - x) ** 2, "x²(L-x)²"), (np.sin(np.pi * x / L), "sin(πx/L)")]:
-    E = energy(f) / e
-    print(f"{name:10s} : {E:.6f} eV (오차: {(E - E_exact) / E_exact * 100:+8.4f} %)")
+x, L_, hbar_, m = sp.symbols("x L hbar m", positive=True)
+
+psi1 = x * (L_ - x)
+psi2 = x**2 * (L_ - x)**2
+psi3 = sp.sin(sp.pi * x / L_)
+
+num1 = sp.integrate(-hbar_**2 / (2 * m) * psi1 * psi1.diff(x, 2), (x, 0, L_))
+denum1 = sp.integrate(psi1**2, (x, 0, L_))
+energy1 = num1 / denum1
+energy1_eV = energy1.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
+print(f"x(L-x): {energy1} = {energy1_eV:.6f} eV (오차: {(energy1_eV - E_exact) / E_exact * 100:+8.4f} %)")
+
+num2 = sp.integrate(-hbar_**2 / (2 * m) * psi2 * psi2.diff(x, 2), (x, 0, L_))
+denum2 = sp.integrate(psi2**2, (x, 0, L_))
+energy2 = num2 / denum2
+energy2_eV = energy2.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
+print(f"x²(L-x)²: {energy2} = {energy2_eV:.6f} eV (오차: {(energy2_eV - E_exact) / E_exact * 100:+8.4f} %)")
+
+num3 = sp.integrate(-hbar_**2 / (2 * m) * psi3 * psi3.diff(x, 2), (x, 0, L_))
+denum3 = sp.integrate(psi3**2, (x, 0, L_))
+energy3 = num3 / denum3
+energy3_eV = energy3.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
+print(f"sin(πx/L): {energy3} = {energy3_eV:.6f} eV (오차: {(energy3_eV - E_exact) / E_exact * 100:+8.4f} %)")
 ```
 ```
 참값 : 0.376030 eV
-x(L-x)     : 0.380998 eV (오차:  +1.3212 %)
-x²(L-x)²   : 0.457198 eV (오차: +21.5854 %)
-sin(πx/L)  : 0.376030 eV (오차:  -0.0000 %)
+x(L-x): 5*hbar**2/(L**2*m) = 0.380998 eV (오차:  +1.3212 %)
+x²(L-x)²: 6*hbar**2/(L**2*m) = 0.457198 eV (오차: +21.5854 %)
+sin(πx/L): pi**2*hbar**2/(2*L**2*m) = 0.376030 eV (오차:  +0.0000 %)
 ```
 
 정확한 해석해인 사인 함수와 비교해봤습니다. 확실히 변분 원리대로 시험 함수는 참값보다 큰 에너지를 주네요. 그런데 조금 더 복잡한 함수인 $x^2(L-x)^2$은 오차가 매우 크게 납니다. 왜 그럴까요? 함수의 모양을 보면 알 수 있습니다.
 ```python
+import numpy as np
 import matplotlib.pyplot as plt
 
 xs = np.linspace(0, L, 500)
@@ -114,14 +125,18 @@ plt.show()
 ```
 ![시험 함수의 비교](/assets/image-86.png)
 
-4차 포물선 함수는 2차 포물선 함수에 비해서 사인 함수와 너무 안 맞습니다. 특히 양쪽 끝에서 차이가 크게 나죠. 일반적으로 다항식의 차수가 높아질수록 근사가 잘 되는 건 맞지만 지금처럼 모양이 안 맞는 함수를 넣으면 오히려 오차가 더 커진다는 것을 알 수 있습니다. 추가로 4차 포물선 함수로 근사한 경우도 비교해보죠.
+4차 포물선 함수는 2차 포물선 함수에 비해서 사인 함수와 너무 안 맞습니다. 특히 양쪽 끝에서 차이가 크게 나죠. 일반적으로 다항식의 차수가 높아질수록 근사가 잘 되는 건 맞지만 지금처럼 모양이 안 맞는 함수를 넣으면 오히려 오차가 더 커진다는 것을 알 수 있습니다. 추가로 4차 포물선 함수로 근사한 경우도 비교해보죠. 이번에는 적분이 복잡하게 나올테니 결과값만 출력하도록 하겠습니다.
 ```python
-f = x * (L - x) * np.pi / L**2 + x**2 * (L - x)**2 * (16 - 4 * np.pi) / L**4
-E = energy(f) / e
-print(f"4차 근사 : {E:.6f} eV (오차: {(E - E_exact) / E_exact * 100:+8.4f} %)")
+psi4 = x * (L_ - x) * sp.pi / L_**2 + x**2 * (L_ - x)**2 * (16 - 4 * sp.pi) / L_**4
+
+num4 = sp.integrate(-hbar_**2 / (2 * m) * psi4 * psi4.diff(x, 2), (x, 0, L_))
+denum4 = sp.integrate(psi4**2, (x, 0, L_))
+energy4 = num4 / denum4
+energy4_eV = energy4.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
+print(f"4차 근사: {energy4_eV:.6f} eV (오차: {(energy4_eV - E_exact) / E_exact * 100:+8.4f} %)")
 ```
 ```
-4차 근사 : 0.376040 eV (오차:  +0.0026 %)
+4차 근사: 0.376040 eV (오차:  +0.0026 %)
 ```
 오차가 매우 작아져서 소수점 넷째 자리까지 맞네요. 이런 식으로 정확한 파동 함수의 모양과 점점 비슷한 시험 함수를 넣으면 참값에 가까워지는 값을 얻게 됩니다.
 
@@ -132,14 +147,22 @@ print(f"4차 근사 : {E:.6f} eV (오차: {(E - E_exact) / E_exact * 100:+8.4f} 
 조화 진동자의 퍼텐셜을 보면 원점에서는 0이고 거리가 멀어질수록 급격하게 무한대로 발산합니다. 그러니 파동 함수의 경계 조건은 거리가 무한대일 때 0이 되는 것이죠. 그리고 원점 기준으로 대칭이어야 할테니 $e^{-x^2}$ 같은 함수가 적당해 보이네요. 길이의 -2승 차원을 갖는 매개변수 $c>0$를 지수에 넣어서 시험 함수 $\phi = e^{-cx^2}$를 만들겠습니다.
 
 $$
-\begin{align*}
-\left\langle \hat{H} \right\rangle &= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2} \\
-&= -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{(4c^2x^2-2c)e^{-2cx^2}} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{x^2 e^{-2cx^2}} \, dx \\
-&= \left( \frac{\hbar^2 c}{2m} + \frac{m \omega^2}{8c} \right) \sqrt{\frac{\pi}{2c}}
-\end{align*}
+\left\langle \hat{H} \right\rangle = -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2}
 $$
 
-이 시험 함수는 규격화되지 않은 상태이기 때문에 $\langle \phi | \phi \rangle=\sqrt{\frac{\pi}{2c}}$로 나누어주어야 합니다. 그러면 에너지는 이렇게 되겠군요.
+이 시험 함수는 규격화되지 않은 상태이기 때문에 $\langle \phi | \phi \rangle$로 나누어주어야 합니다. SymPy로 계산해봅시다.
+```python
+from sympy import oo
+c, w = sp.symbols("c omega", positive=True)
+psi5 = sp.exp(-c * x**2)
+
+num5 = sp.integrate(-hbar_**2 / (2 * m) * psi5 * psi5.diff(x, 2) + m * w**2 * psi5 * x**2 * psi5 / 2, (x, -oo, oo))
+denum5 = sp.integrate(psi5**2, (x, -oo, oo))
+print(sp.simplify(num5 / denum5))
+```
+```
+c*hbar**2/(2*m) + m*omega**2/(8*c)
+```
 
 $$
 E_{\phi} = \frac{\hbar^2 c}{2m} + \frac{m \omega^2}{8c}
