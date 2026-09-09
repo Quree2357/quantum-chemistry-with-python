@@ -24,7 +24,7 @@ $$
 \phi = \sum_n c_n \psi_n
 $$
 
-이 때, $\psi_n$은 Hamiltonian의 정확한 고유 함수들입니다. 즉, $\hat{H}\psi_n = E_n \psi_n$을 만족하는 함수들이죠. 이것을 위의 에너지 기댓값 식에 대입하면 다음과 같습니다. (시험 함수 $\phi$가 규격화되어 있다고 가정합시다.)
+이때, $\psi_n$은 Hamiltonian의 정확한 고유 함수들입니다. 즉, $\hat{H}\psi_n = E_n \psi_n$을 만족하는 함수들이죠. 이것을 위의 에너지 기댓값 식에 대입하면 다음과 같습니다. (시험 함수 $\phi$가 규격화되어 있다고 가정합시다.)
 
 $$
 E_{\phi} = \left\langle \phi \middle| \hat{H} \middle| \phi \right\rangle = \int{\phi^* \hat{H} \phi} d\tau = \int{ \sum_n c_n^* \psi_n^* \hat{H} \sum_n c_n \psi_n } d\tau = \int{ \sum_n c_n^* \psi_n^* \sum_n c_n \hat{H} \psi_n } d\tau
@@ -80,20 +80,20 @@ psi2 = x**2 * (L_ - x)**2
 psi3 = sp.sin(sp.pi * x / L_)
 
 num1 = sp.integrate(-hbar_**2 / (2 * m) * psi1 * psi1.diff(x, 2), (x, 0, L_))
-denum1 = sp.integrate(psi1**2, (x, 0, L_))
-energy1 = num1 / denum1
+denom1 = sp.integrate(psi1**2, (x, 0, L_))
+energy1 = num1 / denom1
 energy1_eV = energy1.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
 print(f"x(L-x): {energy1} = {energy1_eV:.6f} eV (오차: {(energy1_eV - E_exact) / E_exact * 100:+8.4f} %)")
 
 num2 = sp.integrate(-hbar_**2 / (2 * m) * psi2 * psi2.diff(x, 2), (x, 0, L_))
-denum2 = sp.integrate(psi2**2, (x, 0, L_))
-energy2 = num2 / denum2
+denom2 = sp.integrate(psi2**2, (x, 0, L_))
+energy2 = num2 / denom2
 energy2_eV = energy2.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
 print(f"x²(L-x)²: {energy2} = {energy2_eV:.6f} eV (오차: {(energy2_eV - E_exact) / E_exact * 100:+8.4f} %)")
 
 num3 = sp.integrate(-hbar_**2 / (2 * m) * psi3 * psi3.diff(x, 2), (x, 0, L_))
-denum3 = sp.integrate(psi3**2, (x, 0, L_))
-energy3 = num3 / denum3
+denom3 = sp.integrate(psi3**2, (x, 0, L_))
+energy3 = num3 / denom3
 energy3_eV = energy3.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
 print(f"sin(πx/L): {energy3} = {energy3_eV:.6f} eV (오차: {(energy3_eV - E_exact) / E_exact * 100:+8.4f} %)")
 ```
@@ -125,13 +125,13 @@ plt.show()
 ```
 ![시험 함수의 비교](/assets/image-86.png)
 
-4차 포물선 함수는 2차 포물선 함수에 비해서 사인 함수와 너무 안 맞습니다. 특히 양쪽 끝에서 차이가 크게 나죠. 일반적으로 다항식의 차수가 높아질수록 근사가 잘 되는 건 맞지만 지금처럼 모양이 안 맞는 함수를 넣으면 오히려 오차가 더 커진다는 것을 알 수 있습니다. 추가로 4차 포물선 함수로 근사한 경우도 비교해보죠. 이번에는 적분이 복잡하게 나올테니 결과값만 출력하도록 하겠습니다.
+4차 포물선 함수는 2차 포물선 함수에 비해서 사인 함수와 너무 안 맞습니다. 특히 양쪽 끝에서 차이가 크게 나죠. 일반적으로 다항식의 차수가 높아질수록 근사가 잘 되는 건 맞지만 지금처럼 모양이 안 맞는 함수를 넣으면 오히려 오차가 더 커진다는 것을 알 수 있습니다. 추가로 4차 포물선 함수로 근사한 경우도 비교해보죠. 이번에는 적분이 복잡하게 나올 테니 결과값만 출력하도록 하겠습니다.
 ```python
 psi4 = x * (L_ - x) * sp.pi / L_**2 + x**2 * (L_ - x)**2 * (16 - 4 * sp.pi) / L_**4
 
 num4 = sp.integrate(-hbar_**2 / (2 * m) * psi4 * psi4.diff(x, 2), (x, 0, L_))
-denum4 = sp.integrate(psi4**2, (x, 0, L_))
-energy4 = num4 / denum4
+denom4 = sp.integrate(psi4**2, (x, 0, L_))
+energy4 = num4 / denom4
 energy4_eV = energy4.evalf(subs={hbar_: hbar, L_: L, m: m_e}) / e
 print(f"4차 근사: {energy4_eV:.6f} eV (오차: {(energy4_eV - E_exact) / E_exact * 100:+8.4f} %)")
 ```
@@ -144,7 +144,7 @@ print(f"4차 근사: {energy4_eV:.6f} eV (오차: {(energy4_eV - E_exact) / E_ex
 ## 매개변수와 변분법
 
 그렇다고 정답에 가까운 값이 나올 거라고 믿으면서 무턱대고 아무 시험 함수나 막 집어넣어볼 수는 없습니다. 어떻게 하면 효율적으로 시험 함수를 찾을 수 있을까요? 한 가지 방법은 시험 함수에 매개변수를 넣어놓고 값을 조절하면서 에너지가 가장 낮아지도록 만드는 값을 찾는 것입니다. 이번에는 조화 진동자 문제에 이 방법을 적용해보죠.  
-조화 진동자의 퍼텐셜을 보면 원점에서는 0이고 거리가 멀어질수록 급격하게 무한대로 발산합니다. 그러니 파동 함수의 경계 조건은 거리가 무한대일 때 0이 되는 것이죠. 그리고 원점 기준으로 대칭이어야 할테니 $e^{-x^2}$ 같은 함수가 적당해 보이네요. 길이의 -2승 차원을 갖는 매개변수 $c>0$를 지수에 넣어서 시험 함수 $\phi = e^{-cx^2}$를 만들겠습니다.
+조화 진동자의 퍼텐셜을 보면 원점에서는 0이고 거리가 멀어질수록 급격하게 무한대로 발산합니다. 그러니 파동 함수의 경계 조건은 거리가 무한대일 때 0이 되는 것이죠. 그리고 원점 기준으로 대칭이어야 할 테니 $e^{-x^2}$ 같은 함수가 적당해 보이네요. 길이의 -2승 차원을 갖는 매개변수 $c>0$를 지수에 넣어서 시험 함수 $\phi = e^{-cx^2}$를 만들겠습니다.
 
 $$
 \left\langle \hat{H} \right\rangle = -\frac{\hbar^2}{2m} \int_{-\infty}^{\infty}{\phi^* \, \frac{d^2}{dx^2} \phi} \, dx + \frac{1}{2}m\omega^2 \int_{-\infty}^{\infty}{\phi^* x^2 \phi } \, dx \qquad \phi = e^{-cx^2}
@@ -157,8 +157,8 @@ c, w = sp.symbols("c omega", positive=True)
 psi5 = sp.exp(-c * x**2)
 
 num5 = sp.integrate(-hbar_**2 / (2 * m) * psi5 * psi5.diff(x, 2) + m * w**2 * psi5 * x**2 * psi5 / 2, (x, -oo, oo))
-denum5 = sp.integrate(psi5**2, (x, -oo, oo))
-print(sp.simplify(num5 / denum5))
+denom5 = sp.integrate(psi5**2, (x, -oo, oo))
+print(sp.simplify(num5 / denom5))
 ```
 ```
 c*hbar**2/(2*m) + m*omega**2/(8*c)
