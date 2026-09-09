@@ -26,7 +26,8 @@ $$
 
 $$
 \psi_n = \psi_n^{(0)} + \lambda \psi_n^{(1)} + \lambda^2 \psi_n^{(2)} + \cdots
-\\ \, \\
+$$
+$$
 E_n = E_n^{(0)} + \lambda E_n^{(1)} + \lambda^2 E_n^{(2)} + \cdots
 $$
 
