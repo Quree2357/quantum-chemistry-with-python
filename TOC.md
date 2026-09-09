@@ -68,4 +68,4 @@
     * [11.2. 선형 변분 함수](pages/11-02-linear-variation-functions.md)
     * [11.3. 섭동론](pages/11-03-perturbation-theory.md)
     * [11.4. 헬륨 원자의 근사](pages/11-04-variation-and-perturbation-of-helium.md)
-    * [11.5. 축퇴 준위의 섭동](pages/11-05-perturbation-for-degenerate-energy-level.md)
+    * [11.5. 축퇴 준위의 섭동론](pages/11-05-perturbation-for-degenerate-energy-level.md)
