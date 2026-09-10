@@ -72,6 +72,6 @@
 * [Part III. 대칭성과 분자 궤도](pages/part-3-atomic-structure.md)
   * [12. 분자와 화학 결합](pages/12-molecules-and-chemical-bonding.md)
     * [12.1. Born-Oppenheimer 근사](pages/12-01-born-oppenheimer-approximation.md)
-    * [12.2. 수소 분자 이온](pages/12-02-hydrogen-molecular-ion.md)
+    * [12.2. 수소 분자 이온](pages/12-02-hydrogen-molecule-ion.md)
     * [12.3. 화학 결합의 정체](pages/12-03-what-makes-chemical-bonding.md)
     * [12.4. 퍼텐셜 에너지 곡선](pages/12-04-potential-energy-surface.md)
