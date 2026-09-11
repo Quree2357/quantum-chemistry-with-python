@@ -74,4 +74,4 @@
     * [12.1. Born-Oppenheimer 근사](pages/12-01-born-oppenheimer-approximation.md)
     * [12.2. 수소 분자 이온](pages/12-02-hydrogen-molecule-ion.md)
     * [12.3. 화학 결합의 정체](pages/12-03-what-makes-chemical-bonding.md)
-    * [12.4. 퍼텐셜 에너지 곡선](pages/12-04-potential-energy-surface.md)
+    * [12.4. 수소 분자](pages/12-04-hydrogen-molecule.md)
