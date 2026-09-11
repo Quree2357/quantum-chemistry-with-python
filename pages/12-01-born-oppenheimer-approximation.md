@@ -5,10 +5,7 @@
 드디어 분자를 다뤄볼 차례입니다. 언제나 시작은 Schrödinger 방정식을 만드는 것입니다. 상황을 단순하게 만들기 위해 원자핵과 전자는 모두 크기가 없는 점이고, 스핀-궤도 결합이나 상대론적인 상호작용 같은 건 모두 무시한다고 가정해봅시다. 그러면 분자의 Hamiltonian은 (원자 단위계로) 이렇게 쓸 수 있습니다.
 
 $$
-\hat{H} =
-\underbrace{-\frac{1}{2}\sum_{a} \frac{1}{m_a} \nabla_a^2}_{\text{a번 핵의 운동에너지}}
-\overbrace{-\frac{1}{2}\sum_{i} \frac{1}{m_e} \nabla_i^2}^{\text{i번 전자의 운동에너지}}
-+ \underbrace{\sum_a \sum_{b>a}\frac{Z_a Z_b}{r_{ab}} - \sum_a \sum_{i}\frac{Z_a}{r_{ai}} + \sum_i \sum_{j>i}\frac{1}{r_{ij}}}_{\text{핵/핵, 핵/전자, 전자/전자간 반발 항}}
+\hat{H} = \underbrace{-\frac{1}{2}\sum_{a} \frac{1}{m_a} \nabla_a^2}_{\text{a번 핵의 운동에너지}} \overbrace{-\frac{1}{2}\sum_{i} \frac{1}{m_e} \nabla_i^2}^{\text{i번 전자의 운동에너지}} + \underbrace{\sum_a \sum_{b>a}\frac{Z_a Z_b}{r_{ab}} - \sum_a \sum_{i}\frac{Z_a}{r_{ai}} + \sum_i \sum_{j>i}\frac{1}{r_{ij}}}_{\text{핵/핵, 핵/전자, 전자/전자간 반발 항}}
 $$
 
 항이 무지막지하게 늘었습니다. 입자가 3개만 있어도 정확한 해석해를 못 구한다고 했는데 큰일났네요. 이 말도 안 되는 몹을 어떻게 잡아야 한담...
@@ -23,9 +20,7 @@ $$
 핵들의 위치를 고정시키고 나면 핵의 운동 에너지에 해당하는 항이 사라지고, 핵/핵 반발 항은 그냥 상수 $V_{NN}$이 되어버립니다.
 
 $$
-\hat{H_e} =
--\frac{1}{2}\sum_{i} \frac{1}{m_e} \nabla_i^2
-+ V_{NN} - \sum_a \sum_{i}\frac{Z_a}{r_{ai}} + \sum_i \sum_{j>i}\frac{1}{r_{ij}}
+\hat{H_e} = -\frac{1}{2}\sum_{i} \frac{1}{m_e} \nabla_i^2 + V_{NN} - \sum_a \sum_{i}\frac{Z_a}{r_{ai}} + \sum_i \sum_{j>i}\frac{1}{r_{ij}}
 $$
 
 이제 전자만의 문제가 되었습니다. 이 식을 풀면 전자의 파동 함수와 에너지가 나오겠죠. 물론, 핵들의 가능한 배치는 무한히 많고, 각각의 배치마다 서로 다른 식과 해가 나올 겁니다. 그래서 전자의 에너지와 파동 함수는 핵들의 위치 $\mathbf{R}$에도 의존합니다.
