@@ -1,6 +1,6 @@
 # 12.1. Born-Oppenheimer 근사
 
-
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/12-01.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
 드디어 분자를 다뤄볼 차례입니다. 언제나 시작은 Schrödinger 방정식을 만드는 것입니다. 상황을 단순하게 만들기 위해 원자핵과 전자는 모두 크기가 없는 점이고, 스핀-궤도 결합이나 상대론적인 상호작용 같은 건 모두 무시한다고 가정해봅시다. 그러면 분자의 Hamiltonian은 (원자 단위계로) 이렇게 쓸 수 있습니다.
 
