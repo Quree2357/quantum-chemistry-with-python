@@ -53,7 +53,7 @@ $$
 \text{고전 파동: } \omega \propto k \qquad \qquad \text{물질파: } \omega \propto k^2
 $$
 
-고전 파동 방정식은 전자의 파동을 만들어낼 수 없습니다. 틀린 파동을 내놓거든요.
+고전 파동 방정식은 전자의 파동을 만들어낼 수 없습니다. 분산 관계가 틀리거든요.
 
 
 ## Schrödinger 방정식
@@ -106,7 +106,7 @@ $$
 i\hbar\frac{\partial \Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2 \Psi}{\partial x^2} + V(x)\Psi
 $$
 
-이것이 바로 1926년에 발표된 **시간 의존 Schrödinger 방정식(time-dependent Schrödinger equation)**입니다. 그리고 여기서 $\Psi$를 **파동함수(wave function)**이라고 부르는 것입니다. 읽는 법은 간단합니다. 우변의 첫 항이 운동에너지, 둘째 항이 퍼텐셜 에너지에 해당하는 항입니다.  결국 에너지 보존 법칙을 파동의 언어로 쓴 것입니다.
+이것이 바로 1926년에 발표된 **시간 의존 Schrödinger 방정식(time-dependent Schrödinger equation)**입니다. 그리고 여기서 $\Psi$를 **파동함수(wave function)**이라고 부르는 것입니다. 읽는 법은 간단합니다. 우변의 첫 항이 운동에너지, 둘째 항이 퍼텐셜 에너지에 해당하는 항입니다. 결국 에너지 보존 법칙을 파동의 언어로 쓴 것입니다.  
 
 
 ## 그래서 무엇이 다른가
