@@ -49,42 +49,6 @@ $$
 핵들의 위치에 따라 분자의 전체 에너지가 어떻게 변하는지를 나타내는 것이 PES이니 이 곡면을 따라서 분자의 구조 완화, 혹은 분자 간 화학 반응의 경로가 정해지게 됩니다. 계산화학 프로그램에서 분자의 기하 최적화 같은 계산을 돌릴 때 이런 과정을 거치는 거죠.
 
 이산화탄소처럼 3개의 원자로 이루어진 선형 분자의 경우에는 PES를 그리면 대충 이런 식으로 그려지게 됩니다.
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-
-De, a, r0 = 11.372, 2.075, 1.173
-r1 = np.linspace(0.8, 4, 150)
-r2 = np.linspace(0.8, 4, 150)
-
-X, Y = np.meshgrid(r1, r2)
-V = De * ((1 - np.exp(-a * (X - r0))) ** 2 + (1 - np.exp(-a * (Y - r0))) ** 2)
-
-fig = plt.figure(figsize=(12, 6))
-
-ax1 = fig.add_subplot(1, 2, 1, projection="3d")
-ax1.plot_surface(X, Y, V, cmap="viridis", rstride=3, cstride=3, linewidth=0, antialiased=True, alpha=0.9)
-ax1.contour(X, Y, V, levels=12, zdir="z", offset=V.min() - 2, cmap="viridis", linewidths=1)
-ax1.plot([r0], [r0], [V.min()], "o", ms=8, color="crimson")
-ax1.set_xlabel("R1 (Angstrom)")
-ax1.set_ylabel("R2 (Angstrom)")
-ax1.set_zlabel("E (eV)")
-ax1.set_xlim(0.8, 4)
-ax1.set_ylim(0.8, 4)
-ax1.set_zlim(-2, 22)
-ax1.view_init(elev=28, azim=-110)
-
-ax2 = fig.add_subplot(1, 2, 2)
-cs = ax2.contourf(X, Y, V, levels=25, cmap="viridis")
-ax2.contour(X, Y, V, levels=12, colors="white", linewidths=1, alpha=0.5)
-ax2.plot(r0, r0, "o", ms=10, color="crimson")
-ax2.set_xlabel("R1 (Angstrom)")
-ax2.set_ylabel("R2 (Angstrom)")
-plt.colorbar(cs, ax=ax2, label="E (eV)")
-
-plt.tight_layout()
-plt.show()
-```
 ![이산화탄소의 단순 PES](/assets/image-89.png)
 
 탄소와 산소 사이의 결합 길이가 달라지면 핵들의 상대적인 위치가 달라지면서 분자의 전체 에너지가 바뀌죠. 빨간 점으로 표시한 부분이 가장 에너지가 낮아 가장 안정한 구조의 이산화탄소 분자입니다. 이 곡면에 공을 굴린다고 생각해보세요. 공은 결국 가장 낮은 곳으로 내려갈 거고, 그 지점이 가장 안정한 곳인거죠.
