@@ -27,7 +27,7 @@
     * [03.1. 진동하는 줄 — 변수분리법](pages/03-01-classical-wave-equation.md)
     * [03.2. 진동하는 막 — 2차원 문제](pages/03-02-vibrating-membrane.md)
     * [03.3. Schrödinger 방정식](pages/03-03-the-schrodinger-equation.md)
-    * [03.4. 파동함수가 갖춰야 할 조건](pages/03-04-the-wave-function.md)
+    * [03.4. 파동 함수가 갖춰야 할 조건](pages/03-04-the-wave-function.md)
   * [04. 상자 속 입자](pages/04-particle-in-a-box.md)
     * [04.1. 같은 방정식, 다른 의미](pages/04-01-1D-PIB.md)
     * [04.2. 색을 내는 분자](pages/04-02-conjugate-molecules.md)
