@@ -71,7 +71,7 @@ $$
 Y_l^m(\theta,\phi) = N_{lm}\,P_l^m(\cos\theta)\,e^{im\phi}
 $$
 
-앞에 붙은 $N_{lm}$은 그냥 규격화 상수입니다. 그리고 특별히 이 파동함수는 **구면 조화 함수(spherical harmonics)**라는 이름이 붙어있습니다. 처음 몇 개의 함수는 이렇게 생겼습니다.
+앞에 붙은 $N_{lm}$은 그냥 규격화 상수입니다. 그리고 특별히 이 파동 함수는 **구면 조화 함수(spherical harmonics)**라는 이름이 붙어있습니다. 처음 몇 개의 함수는 이렇게 생겼습니다.
 
 $$
 Y_0^0 = \sqrt{\frac{1}{4\pi}}, \quad Y_1^0 = \sqrt{\frac{3}{4\pi}}\cos\theta, \quad Y_1^{\pm1}=\mp\sqrt{\frac{3}{8\pi}}\sin\theta\,e^{\pm i\phi}

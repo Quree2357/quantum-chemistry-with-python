@@ -2,7 +2,7 @@
 
 <a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/00-01-05.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
 
-지금까지 우리는 벡터를 다루고, 내적을 배우고, 기저로 펼치고, 행렬로 변환하고, 대각화까지 했습니다. 전부 숫자 몇 개짜리 벡터를 가지고 한 일이죠. 그런데 양자역학이 다루는 건 파동함수라는 이름의 함수입니다.
+지금까지 우리는 벡터를 다루고, 내적을 배우고, 기저로 펼치고, 행렬로 변환하고, 대각화까지 했습니다. 전부 숫자 몇 개짜리 벡터를 가지고 한 일이죠. 그런데 양자역학이 다루는 건 파동 함수라는 이름의 함수입니다.
 
 이 절에서 하려는 일은 딱 하나입니다. 지금까지 배운 것을 함수에도 그대로 쓸 수 있다는 것을 보이는 겁니다. 그것도 비유가 아니라 문자 그대로요.
 

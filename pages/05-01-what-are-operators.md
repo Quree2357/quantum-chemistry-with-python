@@ -30,7 +30,7 @@ $$
 
 ### 위치 연산자
 
-별거 없습니다. 그냥 파동함수에 $x$를 곱해줍니다.
+별거 없습니다. 그냥 파동 함수에 $x$를 곱해줍니다.
 
 $$
 \hat{x} = x \quad \Longrightarrow \quad \hat{x}\psi = x\psi
