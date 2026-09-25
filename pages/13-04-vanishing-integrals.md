@@ -180,7 +180,7 @@ norm = np.sqrt([np.sum(f * f) * dV for f in F])
 HF = [apply_H(f) for f in F]
 M = np.array([[np.sum(a * Hb) * dV for Hb in HF] for a in F]) / np.outer(norm, norm)
 
-print(" " * 12 + "".join(f"{n:>7}" for n in names))
+print(" " * 11 + "".join(f"{n:>7}" for n in names))
 for name, sp, row in zip(names, species, M):
     marks = "".join(f"{'x' if abs(v) > 1e-6 else '.':>7}" for v in row)
     print(f"{name:>6} ({sp}){marks}")
@@ -260,7 +260,7 @@ for v in range(1, 6):
 <0|x|4> = +0.0000   (v = 4, 짝수)
 <0|x|5> = +0.0000   (v = 5, 홀수)
 ```
-$v$가 짝수인 경우는 예상대로 0입니다. 대칭성으로 설명되는 부분이죠. 그런데 $v$가 3과 5일 때도 0이 나왔습니다. 이건 대칭성만으로는 설명되지 않습니다. 이 부분은 이름만 잠깐 소개했던 사다리 연산자에서 나옵니다. 대칭성은 "홀수 칸만 움직일 수 있다"까지 알려주고, "그중에서도 한 칸씩만"은 조화 진동자의 특별한 구조가 알려주는 셈입니다.
+$v$가 짝수인 경우는 예상대로 0입니다. 대칭성으로 설명되는 부분이죠. 그런데 $v$가 3과 5일 때도 0이 나왔습니다. 이건 대칭성만으로는 설명되지 않습니다. 이 부분은 6.2절에서 이름만 잠깐 소개했던 사다리 연산자에서 나옵니다. 대칭성은 "홀수 칸만 움직일 수 있다"까지 알려주고, "그중에서도 한 칸씩만"은 조화 진동자의 특별한 구조가 알려주는 셈입니다.
 
 
 ## 다음 이야기
