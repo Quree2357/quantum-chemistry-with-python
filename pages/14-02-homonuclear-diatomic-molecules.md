@@ -1,0 +1,300 @@
+# 14.2. 동핵 이원자 분자
+
+<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/14-02.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
+
+12장에서 수소 분자를 다뤘을 때는 원자 오비탈 중에서 $1s$ 오비탈만 썼기 때문에 영년 방정식이 두 줄이었습니다. 헬륨은 일반적으로 분자를 안 이루니까 넘어가면 다음은 2주기 원소들인데요. 이제는 $2s$ 오비탈과 $2p$ 오비탈들도 분자 오비탈을 만드는 데 기여할 수 있으니 얘네들도 고려해주어야 합니다. 그러면 원자 하나당 원자 오비탈이 5개이니 이원자 분자면 영년 방정식이 10줄이나 됩니다! 다행히 이걸 다 풀 필요는 없고, 14.1절에서 얻은 조건을 생각해보면 모든 오비탈이 다 섞이지는 않는다는 걸 알 수 있으니 실제로 풀어야 하는 건 얼마 안 됩니다.
+
+
+## $1s$는 필요없는 아이
+
+$1s$ 오비탈부터 살펴봅시다. 사실 2주기 원소들의 경우에는 $1s$ 오비탈은 $2s$나 $2p$ 오비탈과 에너지 차이가 매우 큽니다. 탄소는 약 -280 eV, 산소는 무려 -560 eV나 차이가 나죠. 그래서 첫 번째 조건에 따라 원자가 오비탈과는 거의 섞이지 않습니다.  
+
+그렇다면 $1s$ 오비탈끼리는 어떨까요? 같은 원자니까 에너지도 같겠지만 이번에는 두 번째 조건에 걸립니다. 핵의 전하가 커져서 $1s$ 오비탈이 그만큼 줄어드는데 결합 길이도 커져서 둘이 거의 안 겹치거든요. 그래서 결합성 오비탈과 반결합성 오비탈로 갈라지기는 하지만 아주 작은 간격이고, 어차피 둘 다 꽉 찬 상태라 결합에 미치는 효과도 거의 없습니다.  
+
+그러니까 사실상 $1s$ 오비탈들은 그냥 원자 오비탈로 존재할 때와 거의 똑같은 상태로 결합을 구경만 하고 있는 겁니다. 이렇게 결합에 참여하지 않는 안쪽 껍질의 전자를 내부 전자(core electron)이라고 부르고, 우리는 이제 얘네들은 신경쓰지 않아도 됩니다.
+
+
+## 원자가 오비탈의 섞임
+
+이제 $2s$와 $2p$ 오비탈 8개가 남았습니다. 이것들은 어떻게 섞일까요? 마지막 세 번째 조건인 대칭성으로 판단해봅시다. 분자 결합 축을 $z$축으로 놓고 두 원자에 이름을 $A$, $B$라고 붙여보죠.  
+
+먼저 $yz$-평면에 대한 반사 조작을 생각해봅시다. $2s$와 $2p_y$, 그리고 $2p_z$ 오비탈은 이 조작에 대해 그대로지만 $2p_x$ 오비탈은 부호가 바뀝니다. 이 말은 $2p_x$ 오비탈과 다른 오비탈 사이의 적분값이 0이 된다는 뜻입니다. $xz$-평면에 대해서도 똑같은 이야기를 할 수 있고요. 그래서 $2p_x$와 $2p_y$ 오비탈은 $2s$와 $2p_z$ 오비탈과 섞이지 않습니다. 즉, 8개의 오비탈은 이렇게 세 종류로 나뉘죠.
+
+| | 원자 오비탈 | 이름 |
+| - | - | - |
+| $z$축 방향 | $2s_A$, $2s_B$, $2p_{z, A}$, $2p_{z, B}$ | $\sigma$ |
+| $x$축 방향 | $2p_{x, A}$, $2p_{x, B}$ | $\pi$ |
+| $y$축 방향 | $2p_{y, A}$, $2p_{y, B}$ | $\pi$ |
+
+12.2절에서 결합 축에 대한 각운동량에 따라 분자 오비탈에 이름을 붙였던 것 기억하시나요? 각운동량 $m$이 0이면 $\sigma$, $\pm 1$이면 $\pi$였죠. $2s$와 $2p_z$ 오비탈은 결합 축을 중심으로 회전시켜도 변하지 않으니 각운동량이 0이 되어 $\sigma$ 오비탈을 만들고, 나머지 두 개는 $\pi$ 오비탈을 만듭니다.
+
+그리고 $x$축 방향 오비탈들과 $y$축 방향 오비탈들은 분자를 결합 축에 대해 90도만큼 돌리면 서로 자리가 바뀌죠. 이들은 에너지가 같을 수밖에 없으니 $\pi$ 오비탈은 항상 이중으로 축퇴되어 있습니다. 이것이 바로 2차원 기약 표현에 해당하는 거죠.  
+
+동핵 이원자 분자에는 대칭 조작이 하나 더 있습니다. 바로 반전 조작이죠. 반전에 대해 대칭인 경우에는 아래 첨자에 $g$를, 반대칭이면 $u$를 붙였습니다. 반전 조작에 대한 오비탈의 섞임 조건을 적용하기 위해 SALC를 만들면 다시 이렇게 나눌 수 있습니다.
+
+| 대칭 종 | SALC | 대응 블록 크기 |
+| - | - | - |
+| $\sigma_g$ | $2s_A+2s_B$, $2p_{z,A}-2p_{z,B}$ | $2 \times 2$ |
+| $\sigma_u$ | $2s_A-2s_B$, $2p_{z,A}+2p_{z,B}$ | $2 \times 2$ |
+| $\pi_u$ | $2p_{x,A}+2p_{x,B}$, $2p_{y,A}+2p_{y,B}$ | $1 \times 1$ |
+| $\pi_g$ | $2p_{x,A}-2p_{x,B}$, $2p_{y,A}-2p_{y,B}$ | $1 \times 1$ |
+
+$2p_z$ 오비탈의 경우에는 합이 $u$고 차가 $g$로 반대입니다. 이건 $2p_z$ 오비탈 두 개가 $+z$ 방향 로브(lobe)의 부호가 같기 때문에 오히려 더하게 되면 결합 부분에서 상쇄되기 때문입니다. 빼줘야 결합성 오비탈이 되죠.  
+
+이제 각 블록에서 에너지의 순서를 정해주면 됩니다. 일반적으로 같은 대칭 종 안에서 에너지가 낮은 것부터 번호를 붙여주는데, $\sigma$ 대칭 종에서는 $1s$ 오비탈이 만든 분자 오비탈인 $1\sigma_g$와 $1\sigma_u$를 빼고 2부터 시작합니다. 만약 $2s$ 오비탈과 $2p_z$ 오비탈이 많이 섞이지 않는다고 하면 다음과 같은 순서를 가지죠.
+
+$$
+2\sigma_g < 2\sigma_u^* < 3\sigma_g < 1\pi_u < 1\pi_g^* < 3\sigma_u^*
+$$
+
+$3\sigma_g$ 오비탈의 에너지가 $1\pi_u$보다 낮은 이유는 공간적으로 더 많이 겹치기 때문입니다. $p$ 오비탈의 모양을 생각해보면 이해하기 쉽죠. 두 번째 조건이 작용한 것입니다. 이제 이 에너지 순서를 고려해서 오비탈들을 나열해보면 일반화학 교과서에서 많이 본 그림이 나옵니다.
+
+(나중에 그림 그리고 코드 삭제)
+```python
+import matplotlib.pyplot as plt
+
+MO_LEVELS = [
+    {
+        "key": "sigma_g_2s",
+        "label": r"$\sigma_g(2s)$",
+        "energy": 1.0,
+        "degeneracy": 1,
+        "bonding": True,
+    },
+    {
+        "key": "sigma_u_2s",
+        "label": r"$\sigma_u^{*}(2s)$",
+        "energy": 2.2,
+        "degeneracy": 1,
+        "bonding": False,
+    },
+    {
+        "key": "sigma_g_2pz",
+        "label": r"$\sigma_g(2p_z)$",
+        "energy": 4.0,
+        "degeneracy": 1,
+        "bonding": True,
+    },
+    {
+        "key": "pi_u_2p",
+        "label": r"$\pi_u(2p_x,2p_y)$",
+        "energy": 5.0,
+        "degeneracy": 2,
+        "bonding": True,
+    },
+    {
+        "key": "pi_g_2p",
+        "label": r"$\pi_g^{*}(2p_x,2p_y)$",
+        "energy": 6.4,
+        "degeneracy": 2,
+        "bonding": False,
+    },
+    {
+        "key": "sigma_u_2pz",
+        "label": r"$\sigma_u^{*}(2p_z)$",
+        "energy": 7.6,
+        "degeneracy": 1,
+        "bonding": False,
+    },
+]
+
+
+def distribute_hund(number_of_electrons, number_of_orbitals):
+    occupation = [0] * number_of_orbitals
+
+    # 먼저 각 오비탈에 평행 스핀 전자를 하나씩 배치
+    for i in range(min(number_of_electrons, number_of_orbitals)):
+        occupation[i] += 1
+
+    # 남은 전자는 짝지어 배치
+    remaining = number_of_electrons - number_of_orbitals
+
+    if remaining > 0:
+        for i in range(min(remaining, number_of_orbitals)):
+            occupation[i] += 1
+
+    return occupation
+
+
+def fill_atomic_orbitals(valence_electrons):
+    n_2s = min(valence_electrons, 2)
+    n_2p = max(valence_electrons - 2, 0)
+
+    return {
+        "2s": [n_2s],
+        "2p": distribute_hund(n_2p, 3),
+    }
+
+
+def fill_molecular_orbitals(total_valence_electrons):
+    remaining = total_valence_electrons
+    occupations = {}
+
+    for level in MO_LEVELS:
+        degeneracy = level["degeneracy"]
+        capacity = 2 * degeneracy
+        electrons_here = min(remaining, capacity)
+
+        occupations[level["key"]] = distribute_hund(electrons_here, degeneracy)
+
+        remaining -= electrons_here
+
+    return occupations
+
+
+def draw_energy_line(ax, x_center, y, width=0.8, color="black", linewidth=3, zorder=3):
+    ax.plot(
+        [x_center - width / 2, x_center + width / 2],
+        [y, y],
+        color=color,
+        linewidth=linewidth,
+        solid_capstyle="butt",
+        zorder=zorder,
+    )
+
+
+def draw_electrons(ax, x_center, y, occupation, arrow_height=0.42, separation=0.10, color="tab:blue"):
+    y_bottom = y + 0.04
+    y_top = y_bottom + arrow_height
+
+    if occupation >= 1:
+        x_up = x_center - separation / 2
+
+        ax.annotate(
+            "",
+            xy=(x_up, y_top),
+            xytext=(x_up, y_bottom),
+            arrowprops=dict(arrowstyle="-|>", color=color, linewidth=1.5, mutation_scale=10),
+            zorder=5,
+        )
+
+    if occupation == 2:
+        x_down = x_center + separation / 2
+
+        ax.annotate(
+            "",
+            xy=(x_down, y_bottom),
+            xytext=(x_down, y_top),
+            arrowprops=dict(arrowstyle="-|>", color="tab:red", linewidth=1.5, mutation_scale=10),
+            zorder=5,
+        )
+
+
+def draw_orbital_group(ax, x_center, y, occupations, orbital_spacing=0.58, level_width=0.46, level_color="black"):
+    number_of_orbitals = len(occupations)
+
+    if number_of_orbitals == 1:
+        x_positions = [x_center]
+    else:
+        start = x_center - orbital_spacing * (number_of_orbitals - 1) / 2
+        x_positions = [start + i * orbital_spacing for i in range(number_of_orbitals)]
+
+    for x, occupation in zip(x_positions, occupations):
+        draw_energy_line(ax, x_center=x, y=y, width=level_width, color=level_color)
+        draw_electrons(ax, x_center=x, y=y, occupation=occupation)
+
+    return x_positions
+
+
+def draw_correlation_line(ax, x1, y1, x2, y2, color="0.75", linewidth=1, linestyle="--"):
+    ax.plot([x1, x2], [y1, y2], color=color, linewidth=linewidth, linestyle=linestyle, zorder=1)
+
+
+def plot_mo_diagram(show_correlation_lines=True):
+    atomic_occupation = fill_atomic_orbitals(0)
+    mo_occupation = fill_molecular_orbitals(0)
+
+    x_left = 1.5
+    x_mo = 5.0
+    x_right = 8.5
+
+    y_2s_atomic = 1.6
+    y_2p_atomic = 6.0
+
+    fig, ax = plt.subplots(figsize=(7, 10))
+
+    left_2s_x = draw_orbital_group(
+        ax, x_center=x_left, y=y_2s_atomic, occupations=atomic_occupation["2s"], level_color="tab:green"
+    )
+
+    left_2p_x = draw_orbital_group(
+        ax, x_center=x_left, y=y_2p_atomic, occupations=atomic_occupation["2p"], level_color="tab:green"
+    )
+
+    right_2s_x = draw_orbital_group(
+        ax, x_center=x_right, y=y_2s_atomic, occupations=atomic_occupation["2s"], level_color="tab:green"
+    )
+
+    right_2p_x = draw_orbital_group(
+        ax, x_center=x_right, y=y_2p_atomic, occupations=atomic_occupation["2p"], level_color="tab:green"
+    )
+
+    mo_positions = {}
+
+    for level in MO_LEVELS:
+        positions = draw_orbital_group(
+            ax,
+            x_center=x_mo,
+            y=level["energy"],
+            occupations=mo_occupation[level["key"]],
+            orbital_spacing=0.7,
+            level_width=0.6,
+            level_color="black",
+        )
+
+        mo_positions[level["key"]] = positions
+        ax.text(x_mo + 1.0, level["energy"], level["label"], fontsize=13, va="center", ha="left")
+
+    if show_correlation_lines:
+        for mo_key in ["sigma_g_2s", "sigma_u_2s"]:
+            y_mo = next(level["energy"] for level in MO_LEVELS if level["key"] == mo_key)
+
+            draw_correlation_line(ax, left_2s_x[0] + 0.23, y_2s_atomic, mo_positions[mo_key][0] - 0.28, y_mo)
+            draw_correlation_line(ax, right_2s_x[0] - 0.23, y_2s_atomic, mo_positions[mo_key][0] + 0.28, y_mo)
+
+        for mo_key in ["sigma_g_2pz", "sigma_u_2pz"]:
+            y_mo = next(level["energy"] for level in MO_LEVELS if level["key"] == mo_key)
+
+            draw_correlation_line(ax, left_2p_x[2] + 0.23, y_2p_atomic, mo_positions[mo_key][0] - 0.28, y_mo)
+            draw_correlation_line(ax, right_2p_x[0] - 0.23, y_2p_atomic, mo_positions[mo_key][0] + 0.28, y_mo)
+
+        for mo_key in ["pi_u_2p", "pi_g_2p"]:
+            y_mo = next(level["energy"] for level in MO_LEVELS if level["key"] == mo_key)
+
+            draw_correlation_line(ax, left_2p_x[2] + 0.23, y_2p_atomic, mo_positions[mo_key][0] - 0.28, y_mo)
+            draw_correlation_line(ax, left_2p_x[2] + 0.23, y_2p_atomic, mo_positions[mo_key][1] - 0.28, y_mo)
+
+            draw_correlation_line(ax, right_2p_x[0] - 0.23, y_2p_atomic, mo_positions[mo_key][0] + 0.28, y_mo)
+            draw_correlation_line(ax, right_2p_x[0] - 0.23, y_2p_atomic, mo_positions[mo_key][1] + 0.28, y_mo)
+
+    ax.text(x_left, 8.45, "Atomic orbitals", fontsize=15, ha="center", fontweight="bold")
+    ax.text(x_mo, 8.45, "Molecular orbitals", fontsize=15, ha="center", fontweight="bold")
+    ax.text(x_right, 8.45, "Atomic orbitals", fontsize=15, ha="center", fontweight="bold")
+    ax.text(x_left - 0.8, y_2s_atomic, r"$2s$", fontsize=13, va="center")
+    ax.text(x_left - 1.3, y_2p_atomic, r"$2p$", fontsize=13, va="center")
+    ax.text(x_right + 0.8, y_2s_atomic, r"$2s$", fontsize=13, va="center", ha="right")
+    ax.text(x_right + 1.3, y_2p_atomic, r"$2p$", fontsize=13, va="center", ha="right")
+
+    ax.annotate("", xy=(0, 8.1), xytext=(0, 0.5), arrowprops=dict(arrowstyle="-|>", linewidth=1.5, color="black"))
+
+    ax.text(-0.4, 4.3, "Energy", fontsize=13, rotation=90, va="center", ha="center")
+
+    ax.axvline(3.0, 0.05, 0.9, color="0.88", linewidth=1.0, linestyle=":")
+    ax.axvline(7.0, 0.05, 0.9, color="0.88", linewidth=1.0, linestyle=":")
+
+    ax.set_xlim(-0.5, 10.2)
+    ax.set_ylim(0, 9.0)
+    ax.set_title("MO energy diagram (without $2s$-$2p_z$ mixing)", fontsize=18)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    for spine in ax.spines.values():
+        spine.set_visible(False)
+
+    plt.tight_layout()
+    plt.show()
+
+
+plot_mo_diagram()
+```
+![섞임 없는 MO energy diagram](/assets/image-98.png)
