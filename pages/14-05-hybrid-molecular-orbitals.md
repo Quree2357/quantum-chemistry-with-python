@@ -1,7 +1,5 @@
 # 14.5. 분자 오비탈과 혼성
 
-<a target="_blank" rel="noopener noreferrer" href="https://colab.research.google.com/github/Quree2357/quantum-chemistry-with-python/blob/main/scripts/14-05.ipynb">![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)</a>
-
 물 분자의 분자 오비탈 중에서 결합에 참여하지 않는 비공유 전자쌍이 들어 있는 오비탈은 $1b_1$과 $3a_1$이었습니다. 둘은 서로 다른 오비탈이고 에너지도 달랐죠. 그런데 VB 이론에서 혼성 오비탈을 이야기할 때는 두 전자쌍이 동일한 것처럼 배웠습니다. 둘 중에 뭐가 맞는 걸까요?  
 
 12.4절에서 VB 이론과 MO 이론은 서로 상보적이라고 했었죠. 같은 현상을 서로 다른 관점에서 해석하는 것이라고요. 이 말이 무슨 뜻인지 한번 확인해보도록 하겠습니다.
@@ -32,83 +30,6 @@ $$
 
 $p$ 오비탈은 벡터처럼 더할 수 있습니다. 예를 들어, $p_x$와 $p_y$를 반씩 더하면 $x$축과 $y$축 사이 $(1, 1)$ 방향을 향하는 $p$ 오비탈을 만들 수 있죠. 그러니까 위에서 나타낸 4개의 혼성 오비탈들은 각각 $(1, 1, 1)$, $(1, -1, -1)$, $(-1, 1, -1)$, $(-1, -1, 1)$ 방향을 향하고 있습니다. 그리고 이 네 방향은 정사면체를 이룹니다! 여기에 $s$ 오비탈이 더해지면서 부호가 같은 쪽의 로브는 커지고 반대인 쪽은 작아지죠.  
 
-(그림 그리고 코드 지우기)
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from skimage import measure
-
-r_H = 1.0
-H1 = np.array([r_H, r_H, r_H])
-H2 = np.array([r_H, -r_H, -r_H])
-H3 = np.array([-r_H, r_H, -r_H])
-H4 = np.array([-r_H, -r_H, r_H])
-
-L, N = 3.5, 100
-g = np.linspace(-L, L, N)
-X, Y, Z = np.meshgrid(g, g, g, indexing="ij")
-r = np.sqrt(X**2 + Y**2 + Z**2) + 1e-12
-
-zeta = 1.2
-s = r * np.exp(-zeta * r)
-px = np.sqrt(3) * X * np.exp(-zeta * r)
-py = np.sqrt(3) * Y * np.exp(-zeta * r)
-pz = np.sqrt(3) * Z * np.exp(-zeta * r)
-
-h_1 = 0.5 * (s + px + py + pz)
-h_2 = 0.5 * (s + px - py - pz)
-h_3 = 0.5 * (s - px + py - pz)
-h_4 = 0.5 * (s - px - py + pz)
-
-
-def draw_molecule(ax):
-    for H in (H1, H2, H3, H4):
-        ax.plot([0, H[0]], [0, H[1]], [0, H[2]], color="black", lw=3)
-        ax.scatter(*H, s=120, color="white", edgecolor="black", depthshade=False)
-    ax.scatter(0, 0, 0, s=200, color="black", depthshade=False)
-
-
-def draw_orbital(ax, psi, level, colors=("crimson", "steelblue"), alpha=0.5):
-    d = g[1] - g[0]
-    for lv, col in zip((level, -level), colors):
-        if col is None or not psi.min() < lv < psi.max():
-            continue
-        v, f, _, _ = measure.marching_cubes(psi, lv, spacing=(d, d, d))
-        v = v + g[0]
-        ax.plot_trisurf(v[:, 0], v[:, 1], f, v[:, 2], color=col, alpha=alpha, lw=0)
-
-
-def plot_setup(ax, title):
-    ax.set_xlim(-L, L)
-    ax.set_ylim(-L, L)
-    ax.set_zlim(-L, L)
-    ax.set_box_aspect((1, 1, 1))
-    ax.set_xticks([])
-    ax.set_yticks([])
-    ax.set_zticks([])
-    ax.view_init(elev=15, azim=-60)
-    ax.set_title(title, fontsize=12)
-
-
-level = 0.4 * np.abs(h_1).max()
-
-fig = plt.figure(figsize=(7, 7))
-panels = [
-    (h_1, r"$h_1$"),
-    (h_2, r"$h_2$"),
-    (h_3, r"$h_3$"),
-    (h_4, r"$h_4$"),
-]
-
-for k, (psi, title) in enumerate(panels, 1):
-    ax = fig.add_subplot(2, 2, k, projection="3d")
-    draw_orbital(ax, psi, level)
-    draw_molecule(ax)
-    plot_setup(ax, title)
-
-plt.tight_layout()
-plt.show()
-```
 ![sp3 혼성 오비탈](/assets/image-105.png)
 
 물론 모든 혼성 오비탈이 이렇게만 만들어지는 것은 아닙니다. $sp^2$나 $sp$ 혼성 오비탈의 경우에는 다른 조합으로 섞이죠. 결합된 원자가 다르거나 고리를 이루고 있을 때에도 달라집니다. 그러니까 우리는 질문을 거꾸로 하고 있었던 겁니다. '혼성 오비탈이 되면 정사면체 구조를 갖는 것'이 아니라 분자의 구조로부터 혼성 오비탈이 어떤 조합으로 만들어지는지가 결정되는 것입니다. 그래서 똑같은 탄소가 어떨 때는 $sp^3$ 혼성을 가지고 어떨 때는 $sp^2$ 혼성을 가지는 거죠.  
