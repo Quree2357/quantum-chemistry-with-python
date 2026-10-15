@@ -85,5 +85,5 @@
     * [14.1. 오비탈이 섞이는 조건](pages/14-01-orbital-mixing-conditions.md)
     * [14.2. 동핵 이원자 분자](pages/14-02-homonuclear-diatomic-molecules.md)
     * [14.3. 이핵 이원자 분자](pages/14-03-heteronuclear-diatomic-molecules.md)
-    # * [14.4. 물 분자의 분자 오비탈](pages/14-04-molecular-orbitals-of-h2o.md)
-    # * [14.5. 분자 오비탈과 혼성](pages/14-05-hybrid-molecular-orbitals.md)
+     [14.4. 물 분자의 분자 오비탈](pages/14-04-molecular-orbitals-of-h2o.md)
+     [14.5. 분자 오비탈과 혼성](pages/14-05-hybrid-molecular-orbitals.md)
